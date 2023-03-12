@@ -1,0 +1,32 @@
+.newGame{
+  width: 500px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: rgb(225, 255, 254);
+}
+
+button{
+  cursor: pointer;
+  border-radius: 1rem;
+  padding: 5px;
+  width: 100px;
+}
+
+.selecyGameTypeButton{
+  display: flex;
+  justify-content: space-around;
+}
+
+.selectGameMatchButton{
+  display: flex;
+  justify-content: space-around;
+}
+
+.selectTieBreakButton{
+  display: flex;
+  justify-content: space-around;
+}
+
+.newGameNextButton{
+  margin: 10px;
+}
