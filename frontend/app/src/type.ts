@@ -3,15 +3,3 @@ export type GameType = {
   selectGame: string;
   isSelected: boolean;
 };
-
-export type GameMatch = {
-  id: number;
-  selectGameMatch: number;
-  isSelected: boolean;
-};
-
-export type TieBreak = {
-  id: number;
-  selectTieBreak: string;
-  isSelected: boolean;
-};

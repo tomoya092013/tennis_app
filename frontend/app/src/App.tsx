@@ -1,10 +1,10 @@
 import React from 'react';
-import Newgame from './components/NewGame/Newgame';
+import SettingNewgame from './components/SettingNewGame/SettingNewgame';
 
 const App = () => {
   return (
     <div className="app">
-      <Newgame />
+      <SettingNewgame />
     </div>
   );
 };

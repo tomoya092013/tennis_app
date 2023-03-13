@@ -4,7 +4,7 @@ import SelectGameSet from './SelectGameMatch/SelectGameMatch';
 import SelectGameType from './SelectGameType/SelectGameType';
 import SelectTieBreak from './SelectTieBreak/SelectTieBreak';
 
-const NewGameType = () => {
+const SettingNewGameType = () => {
   return (
     <div>
       <SelectGameType />
@@ -15,4 +15,4 @@ const NewGameType = () => {
   );
 };
 
-export default NewGameType;
+export default SettingNewGameType;
