@@ -3,3 +3,7 @@ export type GameType = {
   selectGame: string;
   isSelected: boolean;
 };
+
+export type Player = {
+  name: string;
+};

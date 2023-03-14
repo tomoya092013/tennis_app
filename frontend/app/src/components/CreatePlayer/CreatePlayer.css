@@ -1,0 +1,19 @@
+.createPlayer {
+  width: 500px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: rgb(225, 255, 254);
+}
+
+.addPlayer{
+  margin: 10px;
+}
+
+#player1{
+  margin-left: 5px;
+  padding: 2px 5px;
+}
+#player2{
+  margin-left: 5px;
+  padding: 2px 5px;
+}

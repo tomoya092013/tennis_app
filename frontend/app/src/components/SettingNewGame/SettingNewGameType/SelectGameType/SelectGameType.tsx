@@ -1,7 +1,7 @@
 import React from 'react';
 // import { useRecoilState } from 'recoil';
 // import { gameTypeState } from '../../../../store';
-import { useSettingNewGame, SINGLES, DOUBLES } from '../../useSettingNewGame';
+import { useSettingNewGame, SINGLES, DOUBLES } from '../../../../useSettingNewGame';
 
 const SelectGameType = () => {
   const { gameType, selectSingles, selectDoubles } = useSettingNewGame();

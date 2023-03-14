@@ -1,9 +1,11 @@
 import React from 'react';
-import { useSettingNewGame } from '../../useSettingNewGame';
+import { useNavigate } from 'react-router-dom';
+import { useSettingNewGame } from '../../../../useSettingNewGame';
 
 const NextButton = () => {
   const { enabledNextButton } = useSettingNewGame();
-  const clickNextButton = () => console.log('おした');
+  const navigate = useNavigate();
+  const clickNextButton = () => navigate('./createPlayer');
 
   return (
     <button

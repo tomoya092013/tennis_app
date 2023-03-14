@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { gameMatchState, gameTypeState, tieBreakState } from '../../store';
+import { gameMatchState, gameTypeState, tieBreakState } from './store';
 
 export const SINGLES = 'シングルス';
 export const DOUBLES = 'ダブルス';
@@ -14,6 +14,7 @@ export const useSettingNewGame = () => {
   const [gameMatch, setGameMatch] = useRecoilState(gameMatchState);
   const [tieBreak, setTieBreak] = useRecoilState(tieBreakState);
   const enabledNextButton: boolean = gameType !== null && gameMatch !== null && tieBreak !== null;
+
   const selectSingles = () => {
     setGameType(SINGLES);
   };

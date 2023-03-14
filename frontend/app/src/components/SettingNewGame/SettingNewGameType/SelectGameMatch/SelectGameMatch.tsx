@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSettingNewGame, FIVE_GAMES, SEVEN_GAMES, NINE_GAMES } from '../../useSettingNewGame';
+import { useSettingNewGame, FIVE_GAMES, SEVEN_GAMES, NINE_GAMES } from '../../../../useSettingNewGame';
 
 const SelectGameMatch = () => {
   const { gameMatch, selectFiveGames, selectSevenGames, selectNineGames } = useSettingNewGame();
