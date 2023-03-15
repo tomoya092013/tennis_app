@@ -2,12 +2,16 @@ import React from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { enableAddServeState, modalShowState } from '../../../store';
 import AddDetailShotResult from '../AddDetailShotResult/AddDetailShotResult';
-// import { Player } from '../../../type';
+import { Player } from '../../../type';
 import MissArea from '../MissArea/MissArea';
 import PointArea from '../PointArea/PointArea';
 
-// const PlayerState = (props: Player | null) => {
-const PlayerState = (props: any) => {
+// type Props = {
+//   player: Player;
+// };
+
+const PlayerState = (player: Player) => {
+  // const PlayerState = (props: any) => {
   const enableAddServe = useRecoilValue(enableAddServeState);
   const setModalShow = useSetRecoilState(modalShowState);
   const openModal = () => {
@@ -21,7 +25,7 @@ const PlayerState = (props: any) => {
         disabled={!enableAddServe}
         onClick={openModal}
       >
-        {props !== null ? props.player.name : null}
+        {player !== null ? player.name : null}
       </button>
       <AddDetailShotResult />
       <div className="pointDetail">
