@@ -1,11 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { PlayerListState } from './store';
 
 export const useCreatePlayer = () => {
-  const [singlsePlayerList, setSinglsePlayerList] = useRecoilState(PlayerListState);
+  const navigate = useNavigate();
+
+  const [playerList, setPlayerList] = useRecoilState(PlayerListState);
 
   const createSinglesPlayer = (player1: string, player2: string) => {
-    setSinglsePlayerList([
+    setPlayerList([
       {
         name: player1,
       },
@@ -13,10 +16,11 @@ export const useCreatePlayer = () => {
         name: player2,
       },
     ]);
+    navigate('.././GameScore');
   };
 
   const createDoublesPlayer = (player1: string, player2: string, player3: string, player4: string) => {
-    setSinglsePlayerList([
+    setPlayerList([
       {
         name: player1,
       },
@@ -38,7 +42,7 @@ export const useCreatePlayer = () => {
     player1 !== '' && player2 !== '' && player3 !== '' && player4 !== '';
 
   return {
-    singlsePlayerList,
+    playerList,
     createSinglesPlayer,
     createDoublesPlayer,
     enabledSinglesNextButton,
