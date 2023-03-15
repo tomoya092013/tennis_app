@@ -20,3 +20,18 @@ export const PlayerListState = atom<Player[] | null>({
   key: 'PlayerListState',
   default: null,
 });
+
+export const enableAddServeState = atom<boolean>({
+  key: 'enableAddServeState',
+  default: true,
+});
+
+export const enableAddShotState = atom<boolean>({
+  key: 'enableAddShotState',
+  default: false,
+});
+
+export const modalShowState = atom<boolean>({
+  key: 'modalShowState',
+  default: false,
+});

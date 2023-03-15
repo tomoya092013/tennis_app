@@ -1,0 +1,75 @@
+.gameScoreArea{
+  text-align: center;
+}
+
+.gameScore{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.player{
+  /* width: 200px; */
+  background-color: rgb(210, 210, 210);
+}
+
+
+
+.pointDetail{
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.pointArea{
+  width: 40%;
+}
+
+.missArea{
+  width: 40%;
+}
+
+.playerName{
+  width: 90%;
+  margin-top:10px ;
+}
+
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content{
+  width:50%;
+  padding: 20px;
+  background:#fff;
+}
+
+.navigateArea{
+  background-color: black;
+  color: white;
+  padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.serveButton{
+  width: 150px;
+  margin: 10px;
+  padding: 5px;
+}
+
+.serveBuckButton{
+  background-color: black;
+  color: white;
+}

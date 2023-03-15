@@ -4,6 +4,8 @@ import { useCreatePlayer } from '../../useCreatePlayer';
 import { useSettingNewGame } from '../../useSettingNewGame';
 import Doubles from './Doubles/Doubles';
 import Singles from './Singles/Singles';
+import './GameScore.css';
+import NavigateArea from './NavigateArea/NavigateArea';
 
 const GameScore = () => {
   const { enabledNextButton } = useSettingNewGame();
@@ -15,7 +17,12 @@ const GameScore = () => {
 
   const { gameType } = useSettingNewGame();
 
-  return <>{gameType === 'シングルス' ? <Singles /> : <Doubles />}</>;
+  return (
+    <div className="gameScoreArea">
+      <NavigateArea />
+      {gameType === 'シングルス' ? <Singles /> : <Doubles />}
+    </div>
+  );
 };
 
 export default GameScore;
