@@ -16,9 +16,9 @@ export const tieBreakState = atom<'あり' | 'なし' | null>({
   default: null,
 });
 
-export const PlayerListState = atom<Player[] | null>({
+export const PlayerListState = atom<Player[]>({
   key: 'PlayerListState',
-  default: null,
+  default: [],
 });
 
 export const enableAddServeState = atom<boolean>({
