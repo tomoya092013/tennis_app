@@ -1,33 +1,23 @@
 import React from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { enableAddServeState, modalShowState } from '../../../store';
-import AddDetailShotResult from '../AddDetailShotResult/AddDetailShotResult';
 import { Player } from '../../../type';
 import MissArea from '../MissArea/MissArea';
 import PointArea from '../PointArea/PointArea';
-
-// type Props = {
-//   player: Player;
-// };
+import { useModalPointDetail } from '../../../useModalPointDetail';
 
 const PlayerState = (player: Player) => {
-  // const PlayerState = (props: any) => {
-  const enableAddServe = useRecoilValue(enableAddServeState);
-  const setModalShow = useSetRecoilState(modalShowState);
-  const openModal = () => {
-    setModalShow(true);
-  };
+  const { serve, goToSelectServe } = useModalPointDetail();
+
   return (
     <div className="player">
+      <div className="playerName">{player !== null ? player.name : null}</div>
       <button
-        className="playerName"
-        style={{ backgroundColor: enableAddServe ? '#ffff00' : '' }}
-        disabled={!enableAddServe}
-        onClick={openModal}
+        className="serveButton"
+        style={{ backgroundColor: serve === null ? '#ffff00' : '' }}
+        disabled={serve !== null}
+        onClick={() => goToSelectServe()}
       >
-        {player !== null ? player.name : null}
+        サーブ
       </button>
-      <AddDetailShotResult />
       <div className="pointDetail">
         <PointArea />
         <MissArea />

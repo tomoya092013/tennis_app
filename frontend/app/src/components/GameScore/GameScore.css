@@ -6,6 +6,7 @@
   margin-top: 10px;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .player{
@@ -22,20 +23,21 @@
   padding: 10px;
 }
 
-.pointArea{
+.pointButton{
   width: 40%;
 }
 
-.missArea{
+.missButton{
   width: 40%;
 }
 
 .playerName{
-  width: 90%;
-  margin-top:10px ;
+  /* margin-top:10px ; */
+  border: solid black;
+  background-color: white;
 }
 
-.overlay{
+/* .overlay{
   position:fixed;
   top:0;
   left:0;
@@ -45,13 +47,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
-.content{
+/* .content{
   width:50%;
   padding: 20px;
   background:#fff;
-}
+} */
 
 .navigateArea{
   background-color: black;
@@ -64,6 +66,11 @@
 }
 
 .serveButton{
+  margin-top: 5px;
+  width: 150px;
+}
+
+/* .serveDetailButton{
   width: 150px;
   margin: 10px;
   padding: 5px;
@@ -72,4 +79,17 @@
 .serveBuckButton{
   background-color: black;
   color: white;
+} */
+
+.backToServeResult{
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.backToServeResultButton{
+  background-color: rgb(75, 78, 135);
+  color: white;
+  
 }

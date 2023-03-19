@@ -8,23 +8,30 @@ export type Player = {
   name: string;
 };
 
-export type Point = {
-  serviceAse: number;
-};
+export type PointOrMissState = 'ポイント' | 'ミス';
+export type OrderOfBallState = number;
+export type Serve = 'ファーストサーブ' | 'セカンドサーブ';
+export type ShotType = 'Sa' | 'Df' | 'R' | 'ST' | 'V' | 'Pv' | 'Sm' | 'Etc';
+export type ForeOrBack = 'F' | 'B';
+export type Course = 'Cr' | 'Cr!' | 'St' | 'Md';
+export type PoachVolleyCourse = 'Cr' | 'Cr!' | '右St' | '左St';
+export type MissResult = 'N' | 'Bo' | 'So' | 'Etc';
+export type CountRally = number;
 
-export type Miss = {
-  doubleFault: number;
+export type PointOrMiss = {
+  shotType: ShotType;
+  foreOrBack?: ForeOrBack;
 };
 
 export type GameScore = {
-  player1: {
-    player: Player;
-    points: Point;
-    misses: Miss;
+  player_1: {
+    player: Player | null;
+    point: PointOrMiss[];
+    miss: PointOrMiss[];
   };
-  player2: {
-    player: Player;
-    points: Point[];
-    misses: Miss[];
+  player_2: {
+    player: Player | null;
+    point: PointOrMiss[];
+    miss: PointOrMiss[];
   };
 };

@@ -1,11 +1,15 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { enableAddShotState } from '../../../store';
+import { POINT, useModalPointDetail } from '../../../useModalPointDetail';
 
 const PointArea = () => {
-  const enableAddShot = useRecoilValue(enableAddShotState);
+  const { serve, selectPointOrMiss } = useModalPointDetail();
   return (
-    <button className="pointArea" style={{ backgroundColor: enableAddShot ? '#fcbcdb' : '' }} disabled={!enableAddShot}>
+    <button
+      className="pointButton"
+      onClick={() => selectPointOrMiss(POINT)}
+      style={{ backgroundColor: serve === null ? '' : '#fcbcdb' }}
+      disabled={serve === null}
+    >
       ポイント
     </button>
   );

@@ -1,17 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSettingNewGame } from '../../../../useSettingNewGame';
 
 const NextButton = () => {
-  const { enabledNextButton } = useSettingNewGame();
-  const navigate = useNavigate();
-  const clickNextButton = () => navigate('./createPlayer');
+  const { enabledNextButton, enabledSettingNewGame } = useSettingNewGame();
 
   return (
     <button
       className="newGameNextButton"
       onClick={() => {
-        clickNextButton();
+        enabledSettingNewGame();
       }}
       style={{ backgroundColor: enabledNextButton ? '#00ff7a' : '' }}
       disabled={!enabledNextButton}

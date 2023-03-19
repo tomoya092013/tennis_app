@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCreatePlayer } from '../../../useCreatePlayer';
+// import NextButton from '../NextButton/NextButton';
 
 const SelectSingles = () => {
   const [player1, setPlayer1] = useState('');
@@ -31,6 +32,7 @@ const SelectSingles = () => {
       >
         次へ
       </button>
+      {/* <NextButton player_1={player1} player_2={player2} /> */}
     </>
   );
 };
