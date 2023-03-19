@@ -1,25 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CreatePlayerTitle from './CreatePlayerTitle/CreatePlayerTitle';
 import './CreatePlayer.css';
 import { useSettingNewGame, SINGLES } from '../../useSettingNewGame';
 import SelectSingles from './SelectSingles/SelectSingles';
 import SelectDoubles from './SelectDoubles/SelectDoubles';
-import { Link, useNavigate } from 'react-router-dom';
-// import NextButton from './NextButton/NextButton';
+import { Link } from 'react-router-dom';
+import { useValidatePages } from '../../useValidatePage';
 
 const CreatePlayer = () => {
-  const { enabledNextButton, gameType } = useSettingNewGame();
+  const { gameType } = useSettingNewGame();
+  const { useValidateCreatePlayer } = useValidatePages();
+  useValidateCreatePlayer();
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!enabledNextButton) navigate('../');
-  }, []);
-  // const { gameType } = useSettingNewGame();
   return (
     <div className="createPlayer">
       <CreatePlayerTitle />
       {gameType === SINGLES ? <SelectSingles /> : <SelectDoubles />}
-      {/* <NextButton /> */}
       <div>
         <Link to="/">戻る</Link>
       </div>

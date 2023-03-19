@@ -1,13 +1,12 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { enableAddServeState, enableAddShotState } from '../../../store';
+import { useModalPointDetail } from '../../../useModalPointDetail';
 
 const NavigateArea = () => {
-  const enableAddServe = useRecoilValue(enableAddServeState);
-  const enableAddShot = useRecoilValue(enableAddShotState);
+  const { serve } = useModalPointDetail();
+
   return (
     <div className="navigateArea">
-      {enableAddServe ? <div>サービスプレーヤーを選択</div> : enableAddShot ? <div>誰のポイント？ミス？</div> : ''}
+      {serve === null ? <div>サービスプレーヤーを選択</div> : <div>誰のポイント？ミス？</div>}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { gameMatchState, gameTypeState, tieBreakState } from './store';
 
@@ -13,7 +14,13 @@ export const useSettingNewGame = () => {
   const [gameType, setGameType] = useRecoilState(gameTypeState);
   const [gameMatch, setGameMatch] = useRecoilState(gameMatchState);
   const [tieBreak, setTieBreak] = useRecoilState(tieBreakState);
+
   const enabledNextButton: boolean = gameType !== null && gameMatch !== null && tieBreak !== null;
+  const navigate = useNavigate();
+
+  const enabledSettingNewGame = () => {
+    navigate('/createPlayer');
+  };
 
   const selectSingles = () => {
     setGameType(SINGLES);
@@ -41,6 +48,7 @@ export const useSettingNewGame = () => {
     gameType,
     gameMatch,
     tieBreak,
+    enabledNextButton,
     selectSingles,
     selectDoubles,
     selectFiveGames,
@@ -48,6 +56,6 @@ export const useSettingNewGame = () => {
     selectNineGames,
     selectWithTieBreak,
     selectWithoutTieBreak,
-    enabledNextButton,
+    enabledSettingNewGame,
   };
 };

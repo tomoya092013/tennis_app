@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useCreatePlayer } from '../../useCreatePlayer';
+import React from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { useCreatePlayer } from '../../useCreatePlayer';
+import { useValidatePages } from '../../useValidatePage';
 import { useSettingNewGame } from '../../useSettingNewGame';
 import Doubles from './Doubles/Doubles';
 import Singles from './Singles/Singles';
-import './GameScore.css';
 import NavigateArea from './NavigateArea/NavigateArea';
 
-const GameScore = () => {
-  const { enabledNextButton } = useSettingNewGame();
-  const { enabledSinglesNextButton, enabledDoublesNextButton } = useCreatePlayer();
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!enabledNextButton || !enabledSinglesNextButton || !enabledDoublesNextButton) navigate('../');
-  }, []);
+import './GameScore.css';
 
+const GameScore = () => {
+  const { useValidateGameScore } = useValidatePages();
   const { gameType } = useSettingNewGame();
+
+  useValidateGameScore();
 
   return (
     <div className="gameScoreArea">

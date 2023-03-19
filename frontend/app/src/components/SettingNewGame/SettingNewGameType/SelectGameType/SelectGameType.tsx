@@ -1,19 +1,8 @@
 import React from 'react';
-// import { useRecoilState } from 'recoil';
-// import { gameTypeState } from '../../../../store';
 import { useSettingNewGame, SINGLES, DOUBLES } from '../../../../useSettingNewGame';
 
 const SelectGameType = () => {
   const { gameType, selectSingles, selectDoubles } = useSettingNewGame();
-  // const [gameType, setGameType] = useRecoilState(gameTypeState);
-
-  // const selectSinglse = () => {
-  //   setGameType('シングルス');
-  // };
-
-  // const selectDoubles = () => {
-  //   setGameType('ダブルス');
-  // };
 
   return (
     <>
