@@ -7,20 +7,20 @@ import {
   ShotType,
   Course,
   PoachVolleyCourse,
-  CountRally,
+  RallyCount,
   GameScore,
   MissResult,
   OrderOfBallState,
-  PointOrMiss,
+  PlayerNo,
 } from './type';
 
 const defaultSinglseGameScoreState: GameScore = {
-  player_1: {
+  player1: {
     player: null,
     point: [],
     miss: [],
   },
-  player_2: {
+  player2: {
     player: null,
     point: [],
     miss: [],
@@ -47,51 +47,6 @@ export const playerListState = atom<Player[]>({
   default: [],
 });
 
-// export const selectPlayerState = atom<Player | null>({
-//   key: 'selectPlayerState',
-//   default: null,
-// });
-
-// export const enableAddServeState = atom<boolean>({
-//   key: 'enableAddServeState',
-//   default: true,
-// });
-
-// export const enableAddShotState = atom<boolean>({
-//   key: 'enableAddShotState',
-//   default: false,
-// });
-
-export const modalShowState = atom<boolean>({
-  key: 'modalShowState',
-  default: false,
-});
-
-export const player1_PointListState = atom<PointOrMiss[]>({
-  key: 'player1_PointListState',
-  default: [],
-});
-
-export const player1_MissListState = atom<PointOrMiss[]>({
-  key: 'player1_MissListState',
-  default: [],
-});
-
-export const player2_PointListState = atom<PointOrMiss[]>({
-  key: 'player2_PointListState',
-  default: [],
-});
-
-export const player2_MissListState = atom<PointOrMiss[]>({
-  key: 'player2_MissListState',
-  default: [],
-});
-
-export const singlesGameScoreState = atom<GameScore>({
-  key: 'singlesGameScoreState',
-  default: defaultSinglseGameScoreState,
-});
-
 export const pointOrMissState = atom<PointOrMissState | null>({
   key: 'pointOrMissState',
   default: null,
@@ -108,7 +63,7 @@ export const rallyState = atom<boolean>({
 });
 export const orderOfBallState = atom<OrderOfBallState>({
   key: 'orderOfBallState',
-  default: 0,
+  default: 1,
 });
 export const foreOrBackState = atom<ForeOrBack | null>({
   key: 'foreOrBackState',
@@ -130,7 +85,17 @@ export const missResultState = atom<MissResult | null>({
   key: 'missResultState',
   default: null,
 });
-export const countRallyState = atom<CountRally | null>({
-  key: 'countRallyState',
+export const rallyCountState = atom<RallyCount | null>({
+  key: 'rallyCountState',
+  default: null,
+});
+
+export const singlesGameScoreState = atom<GameScore>({
+  key: 'singlesGameScoreState',
+  default: defaultSinglseGameScoreState,
+});
+
+export const pointOrMissPlayerState = atom<PlayerNo | null>({
+  key: 'pointOrMissPlayerState',
   default: null,
 });

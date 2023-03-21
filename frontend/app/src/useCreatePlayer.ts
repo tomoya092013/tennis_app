@@ -10,9 +10,11 @@ export const useCreatePlayer = () => {
     setPlayerList([
       {
         name: player1,
+        playerNo: 'player1',
       },
       {
         name: player2,
+        playerNo: 'player2',
       },
     ]);
     navigate('/GameScore');
@@ -22,15 +24,19 @@ export const useCreatePlayer = () => {
     setPlayerList([
       {
         name: player1,
+        playerNo: 'player1',
       },
       {
         name: player2,
+        playerNo: 'player2',
       },
       {
         name: player3,
+        playerNo: 'player3',
       },
       {
         name: player4,
+        playerNo: 'player4',
       },
     ]);
     navigate('/GameScore');

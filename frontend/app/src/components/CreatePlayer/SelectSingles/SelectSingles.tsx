@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useCreatePlayer } from '../../../useCreatePlayer';
-// import NextButton from '../NextButton/NextButton';
 
 const SelectSingles = () => {
   const [player1, setPlayer1] = useState('');
