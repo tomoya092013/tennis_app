@@ -1,8 +1,6 @@
-// import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
-  // countRallyState,
   courseState,
   foreOrBackState,
   missResultState,
@@ -63,11 +61,8 @@ export const useModalPointDetail = () => {
   const [course, setCourse] = useRecoilState(courseState);
   const [poachVolleyCourse, setPoachVolleyCourse] = useRecoilState(poachVolleyCourseStaet);
   const [missResult, setMissResult] = useRecoilState(missResultState);
-  //現場setRallyCountのみ使用
   const [rallyCount, setRallyCount] = useRecoilState(rallyCountState);
   const [singlesGameScore, setSinglesGameScore] = useRecoilState(singlesGameScoreState);
-
-  //propsで渡していくと不便なのでrecoilで管理
   const [pointOrMissPlayer, setPointOrMissPlayer] = useRecoilState(pointOrMissPlayerState);
 
   const navigate = useNavigate();
@@ -83,10 +78,6 @@ export const useModalPointDetail = () => {
 
   const addDoubleFault = (playerNo: PlayerNo) => {
     setServe(null);
-    // const newPointOrMiss: PointOrMiss = {
-    //   order: orderOfBall,
-    //   shotType: DOUBLE_FAULT,
-    // };
     const newPointOrMiss: PointOrMiss = {
       order: orderOfBall,
       result: DOUBLE_FAULT,
@@ -129,7 +120,6 @@ export const useModalPointDetail = () => {
     }
     setOrderOfBall(orderOfBall + 1);
     setServe(null);
-    // setRally(false);
     navigate('/gameScore');
   };
 
@@ -230,8 +220,6 @@ export const useModalPointDetail = () => {
   };
 
   const selectMissResult = (missResult: MissResult) => {
-    // setMissResult(missResult);
-
     if (shotType === RECEIVE) {
       const newPointOrMiss: PointOrMiss = {
         order: orderOfBall,
@@ -287,10 +275,6 @@ export const useModalPointDetail = () => {
           order: orderOfBall,
           result: `${foreOrBack + shotType + poachVolleyCourse} (${rallyCount})`,
         };
-        // const newPointOrMiss: PointOrMiss = {
-        //   order: orderOfBall,
-        //   result: shotType === POACH_VOLLEY ?`${foreOrBack + shotType + poachVolleyCourse} (${rallyCount})`:${foreOrBack + shotType + course} (${rallyCount})`
-        // };
         if (pointOrMissPlayer === 'player1') {
           const newSingleGameScore = {
             ...singlesGameScore,
@@ -416,10 +400,3 @@ export const useModalPointDetail = () => {
     selectRallyCount,
   };
 };
-
-// const pointOrMissStringBuilder = (pointOrMiss: PointOrMiss): string=>{
-//   let result = "";
-//   if (pointOrMiss.shotType) result += pointOrMiss.shotType
-
-//   return result
-// }

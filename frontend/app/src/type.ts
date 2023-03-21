@@ -1,16 +1,4 @@
-export type GameType = {
-  id: number;
-  selectGame: string;
-  isSelected: boolean;
-};
-
-export type Player = {
-  name: string;
-  playerNo: PlayerNo;
-};
-
 export type PlayerNo = 'player1' | 'player2';
-
 export type PointOrMissState = 'ポイント' | 'ミス';
 export type OrderOfBallState = number;
 export type Serve = 'ファーストサーブ' | 'セカンドサーブ';
@@ -21,24 +9,16 @@ export type PoachVolleyCourse = 'Cr' | 'Cr!' | '右St' | '左St';
 export type MissResult = 'N' | 'Bo' | 'So' | 'Etc';
 export type RallyCount = number;
 
-// export type PointOrMiss = {
-//   order: number;
-//   shotType: ShotType;
-//   foreOrBack?: ForeOrBack;
-// };
+export type GameType = {
+  id: number;
+  selectGame: string;
+  isSelected: boolean;
+};
 
-// export type GameScore = {
-//   player_1: {
-//     player: Player | null;
-//     point: PointOrMiss[];
-//     miss: PointOrMiss[];
-//   };
-//   player_2: {
-//     player: Player | null;
-//     point: PointOrMiss[];
-//     miss: PointOrMiss[];
-//   };
-// };
+export type Player = {
+  name: string;
+  playerNo: PlayerNo;
+};
 
 export type PointOrMiss = {
   order: number;

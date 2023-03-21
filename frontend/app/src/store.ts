@@ -1,4 +1,3 @@
-// import { atom, selector } from 'recoil';
 import { atom } from 'recoil';
 import {
   Player,
@@ -13,8 +12,6 @@ import {
   MissResult,
   OrderOfBallState,
   PlayerNo,
-  // PointOrMiss,
-  // DisplayPointOrMiss,
 } from './type';
 
 const defaultSinglseGameScoreState: GameScore = {
@@ -49,41 +46,6 @@ export const playerListState = atom<Player[]>({
   key: 'playerListState',
   default: [],
 });
-
-// export const selectPlayerState = atom<Player | null>({
-//   key: 'selectPlayerState',
-//   default: null,
-// });
-
-// export const enableAddServeState = atom<boolean>({
-//   key: 'enableAddServeState',
-//   default: true,
-// });
-
-// export const enableAddShotState = atom<boolean>({
-//   key: 'enableAddShotState',
-//   default: false,
-// });
-
-// export const player1_PointListState = atom<PointOrMiss[]>({
-//   key: 'player1_PointListState',
-//   default: [],
-// });
-
-// export const player1_MissListState = atom<PointOrMiss[]>({
-//   key: 'player1_MissListState',
-//   default: [],
-// });
-
-// export const player2_PointListState = atom<PointOrMiss[]>({
-//   key: 'player2_PointListState',
-//   default: [],
-// });
-
-// export const player2_MissListState = atom<PointOrMiss[]>({
-//   key: 'player2_MissListState',
-//   default: [],
-// });
 
 export const pointOrMissState = atom<PointOrMissState | null>({
   key: 'pointOrMissState',
@@ -137,17 +99,3 @@ export const pointOrMissPlayerState = atom<PlayerNo | null>({
   key: 'pointOrMissPlayerState',
   default: null,
 });
-
-//画面に表示するように、値を組み合わせた新しいstateを作成しようとした
-// export const player1MissListState = selector<DisplayPointOrMiss[]>({
-//   key: 'player1MissListState',
-//   get: ({ get }) => {
-//     const singlesGameScore = get(singlesGameScoreState);
-//     const newPlayer1MissList = singlesGameScore.player_1.miss;
-//     const newPlayer1MissListOrder= newPlayer1MissList.map((player1Miss) => {
-//       player1Miss.detailResult =
-//     })
-
-//     }
-//   },
-// });
