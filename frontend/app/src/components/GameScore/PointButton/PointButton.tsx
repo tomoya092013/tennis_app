@@ -1,12 +1,13 @@
 import React from 'react';
+import { Player } from '../../../type';
 import { POINT, useModalPointDetail } from '../../../useModalPointDetail';
 
-const PointArea = () => {
+const PointButton = (player: Player) => {
   const { serve, selectPointOrMiss } = useModalPointDetail();
   return (
     <button
       className="pointButton"
-      onClick={() => selectPointOrMiss(POINT)}
+      onClick={() => selectPointOrMiss(POINT, player.playerNo)}
       style={{ backgroundColor: serve === null ? '' : '#fcbcdb' }}
       disabled={serve === null}
     >
@@ -15,4 +16,4 @@ const PointArea = () => {
   );
 };
 
-export default PointArea;
+export default PointButton;
