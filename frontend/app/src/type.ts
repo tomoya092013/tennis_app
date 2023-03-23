@@ -1,5 +1,5 @@
 export type PlayerNo = 'player1' | 'player2';
-export type PointOrMissState = 'ポイント' | 'ミス';
+export type PointOrMiss = 'point' | 'miss';
 export type OrderOfBallState = number;
 export type Serve = 'ファーストサーブ' | 'セカンドサーブ';
 export type ShotType = 'Sa' | 'Df' | 'R' | 'ST' | 'V' | 'Pv' | 'Sm' | 'Etc';
@@ -20,20 +20,40 @@ export type Player = {
   playerNo: PlayerNo;
 };
 
-export type PointOrMiss = {
-  order: number;
-  result: string | null;
+// export type PointOrMiss = {
+//   order: number;
+//   result: string | null;
+// };
+
+//プレイヤーが打ったサーブの情報
+export type ServeData = {
+  toatal: number;
+  serve: Serve;
 };
 
-export type GameScore = {
+//このserveはどの種類のサーブではじまったかを示すため
+export type PointOrMissDetail = {
+  order: number;
+  serveType: Serve | null;
+  shotType: ShotType;
+  foreOrBack?: ForeOrBack | null;
+  course?: Course | null;
+  poachVolleyCourse?: PoachVolleyCourse | null;
+  missResult?: MissResult | null;
+  rallyCount?: RallyCount;
+};
+
+export type SinglesGameScore = {
   player1: {
     player: Player | null;
-    point: PointOrMiss[];
-    miss: PointOrMiss[];
+    serveData: ServeData | null;
+    point: PointOrMissDetail[];
+    miss: PointOrMissDetail[];
   };
   player2: {
     player: Player | null;
-    point: PointOrMiss[];
-    miss: PointOrMiss[];
+    serveData: ServeData | null;
+    point: PointOrMissDetail[];
+    miss: PointOrMissDetail[];
   };
 };

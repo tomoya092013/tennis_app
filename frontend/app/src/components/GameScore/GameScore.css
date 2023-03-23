@@ -6,7 +6,12 @@
   margin-top: 10px;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
+}
+
+.gameCount{
+  min-width: 80px;
 }
 
 .player{
@@ -40,8 +45,6 @@
   padding: 10px;
   width: 50%;
   margin: 0 auto;
-  /* display: flex;
-  justify-content: center; */
 }
 
 .serveButton{
@@ -58,15 +61,65 @@
 
 .backToServeResultButton{
   background-color: rgb(75, 78, 135);
-  color: white;
+  color: white ;
+  width: 70px;
 }
 
 .displayDetailSingles{
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
 }
 
-.displayDetailPoint{
+.displayPointorMiss{
   display: flex;
+  justify-content: space-around;
+  width: 320px;
+}
+
+.detailPointorMiss{
+  width: 150px;
+  padding: 10px;
+}
+
+.pointScore{
+  min-width: 80px;
+}
+
+.detailPoitOrMissData{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.resultWithReceive{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  text-decoration:underline;
+}
+
+.resultWithoutReceive{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.startFirstServe{
+  margin:  0 5px 0 0;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.startSecondServe{
+  margin:  0 5px 0 0;
+  border: 1px solid white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
 }
