@@ -6,7 +6,7 @@ const SelectDoubles = () => {
   const [player2, setPlayer2] = useState('');
   const [player3, setPlayer3] = useState('');
   const [player4, setPlayer4] = useState('');
-  const { createDoublesPlayer, enabledDoublesNextButton } = useCreatePlayer();
+  const { enabledDoublesNextButton } = useCreatePlayer();
 
   const handleChangePlayer1 = (e: { target: { value: React.SetStateAction<string> } }) => {
     setPlayer1(e.target.value);
@@ -48,7 +48,7 @@ const SelectDoubles = () => {
       <button
         style={{ backgroundColor: enabledDoublesNextButton(player1, player2, player3, player4) ? '#00ff7a' : '' }}
         disabled={!enabledDoublesNextButton(player1, player2, player3, player4)}
-        onClick={() => createDoublesPlayer(player1, player2, player3, player4)}
+        onClick={() => {}}
       >
         次へ
       </button>

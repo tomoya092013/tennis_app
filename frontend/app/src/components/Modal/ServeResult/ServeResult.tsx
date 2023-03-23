@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { PlayerNo } from '../../../type';
+import React from 'react';
 import { useModalPointDetail } from '../../../useModalPointDetail';
 import { useValidatePages } from '../../../useValidatePage';
 
 const ServeResult = () => {
   const { serve, rally, addServiceAce, selectRally, backToServe } = useModalPointDetail();
   const { useValidateSelectServe } = useValidatePages();
-  const location = useLocation();
-  // eslint-disable-next-line no-unused-vars
-  const [playerNo, _] = useState<PlayerNo>(location.state as PlayerNo);
 
   useValidateSelectServe(serve);
 
@@ -17,7 +12,7 @@ const ServeResult = () => {
     <div className="detailArea">
       <h2>サーブの結果を選択</h2>
       <div>
-        <button className="detailButton" onClick={() => addServiceAce(playerNo)}>
+        <button className="detailButton" onClick={() => addServiceAce()}>
           サービスエース
         </button>
       </div>

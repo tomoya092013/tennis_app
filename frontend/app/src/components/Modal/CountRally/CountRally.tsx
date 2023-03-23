@@ -2,7 +2,7 @@ import React from 'react';
 import { useModalPointDetail } from '../../../useModalPointDetail';
 
 const CountRally = () => {
-  const { selectRallyCount } = useModalPointDetail();
+  const { selectRallyCount, backToCourseOrMissResult } = useModalPointDetail();
   return (
     <div className="detailArea">
       <h2>ラリー数を選択</h2>
@@ -80,7 +80,9 @@ const CountRally = () => {
       </div>
 
       <div>
-        <button className="buckButton">戻る</button>
+        <button className="buckButton" onClick={() => backToCourseOrMissResult()}>
+          戻る
+        </button>
       </div>
     </div>
   );

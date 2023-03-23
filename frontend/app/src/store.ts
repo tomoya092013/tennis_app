@@ -1,27 +1,29 @@
 import { atom } from 'recoil';
 import {
   Player,
-  PointOrMissState,
+  PointOrMiss,
   Serve,
   ForeOrBack,
   ShotType,
   Course,
   PoachVolleyCourse,
   RallyCount,
-  GameScore,
   MissResult,
   OrderOfBallState,
   PlayerNo,
+  SinglesGameScore,
 } from './type';
 
-const defaultSinglseGameScoreState: GameScore = {
+const defaultSinglseGameScoreState: SinglesGameScore = {
   player1: {
     player: null,
+    serveData: null,
     point: [],
     miss: [],
   },
   player2: {
     player: null,
+    serveData: null,
     point: [],
     miss: [],
   },
@@ -47,7 +49,7 @@ export const playerListState = atom<Player[]>({
   default: [],
 });
 
-export const pointOrMissState = atom<PointOrMissState | null>({
+export const pointOrMissState = atom<PointOrMiss | null>({
   key: 'pointOrMissState',
   default: null,
 });
@@ -90,9 +92,14 @@ export const rallyCountState = atom<RallyCount | null>({
   default: null,
 });
 
-export const singlesGameScoreState = atom<GameScore>({
+export const singlesGameScoreState = atom<SinglesGameScore>({
   key: 'singlesGameScoreState',
   default: defaultSinglseGameScoreState,
+});
+
+export const servicePlayerState = atom<PlayerNo | null>({
+  key: 'servicePlayerState',
+  default: null,
 });
 
 export const pointOrMissPlayerState = atom<PlayerNo | null>({

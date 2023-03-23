@@ -20,27 +20,27 @@ export const useCreatePlayer = () => {
     navigate('/GameScore');
   };
 
-  const createDoublesPlayer = (player1: string, player2: string, player3: string, player4: string) => {
-    setPlayerList([
-      {
-        name: player1,
-        playerNo: 'player1',
-      },
-      {
-        name: player2,
-        playerNo: 'player2',
-      },
-      {
-        name: player3,
-        playerNo: 'player3',
-      },
-      {
-        name: player4,
-        playerNo: 'player4',
-      },
-    ]);
-    navigate('/GameScore');
-  };
+  // const createDoublesPlayer = (player1: string, player2: string, player3: string, player4: string) => {
+  //   setPlayerList([
+  //     {
+  //       name: player1,
+  //       playerNo: 'player1',
+  //     },
+  //     {
+  //       name: player2,
+  //       playerNo: 'player2',
+  //     },
+  //     {
+  //       name: player3,
+  //       playerNo: 'player3',
+  //     },
+  //     {
+  //       name: player4,
+  //       playerNo: 'player4',
+  //     },
+  //   ]);
+  //   navigate('/GameScore');
+  // };
 
   const enabledSinglesNextButton = (player1: string, player2: string): boolean => player1 !== '' && player2 !== '';
 
@@ -50,7 +50,7 @@ export const useCreatePlayer = () => {
   return {
     playerList,
     createSinglesPlayer,
-    createDoublesPlayer,
+    // createDoublesPlayer,
     enabledSinglesNextButton,
     enabledDoublesNextButton,
   };

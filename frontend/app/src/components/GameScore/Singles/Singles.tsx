@@ -12,15 +12,15 @@ const Singles = () => {
   const { playerList } = useCreatePlayer();
   if (playerList.length < 2) return null;
 
-  const player_1: Player = playerList[0];
-  const player_2: Player = playerList[1];
+  const player1: Player = playerList[0];
+  const player2: Player = playerList[1];
 
   return (
     <>
       <div className="gameScore">
-        <PlayerState {...player_1} />
+        <PlayerState {...player1} />
         <GameCount />
-        <PlayerState {...player_2} />
+        <PlayerState {...player2} />
         <div className="backToServeResult">
           {serve !== null ? (
             <button
