@@ -19,7 +19,11 @@ const PointOrMissArea = ({ playerNo, pointOrMiss }: Props) => {
             <div className={pointMiss.serveType === FIRST_SERVE ? 'startFirstServe' : 'startSecondServe'}>
               {pointMiss.order}
             </div>
-            <div className={pointMiss.shotType === RECEIVE ? 'resultWithReceive' : 'resultWithoutReceive'}>
+            <div
+              className={
+                pointMiss.shotType === RECEIVE && pointOrMiss === 'miss' ? 'resultWithReceive' : 'resultWithoutReceive'
+              }
+            >
               {pointOrMissStringBuilder(pointMiss)}
             </div>
           </div>
