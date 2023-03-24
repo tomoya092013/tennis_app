@@ -117,11 +117,11 @@ export const pointOrMissPlayerState = atom<PlayerNo | null>({
 export const singlesPointCountState = selector<SinglesPointCount>({
   key: 'singlesPointCountState',
   get: ({ get }) => {
-    const newSinglesGameScore = get(singlesGameScoreState);
-    const player1Point = newSinglesGameScore.player1.point.length;
-    const player1Miss = newSinglesGameScore.player1.miss.length;
-    const player2Point = newSinglesGameScore.player2.point.length;
-    const player2Miss = newSinglesGameScore.player2.miss.length;
+    const currentSinglesGameScore = get(singlesGameScoreState);
+    const player1Point = currentSinglesGameScore.player1.point.length;
+    const player1Miss = currentSinglesGameScore.player1.miss.length;
+    const player2Point = currentSinglesGameScore.player2.point.length;
+    const player2Miss = currentSinglesGameScore.player2.miss.length;
     return {
       team1Point: player1Point + player2Miss,
       team2Point: player2Point + player1Miss,
