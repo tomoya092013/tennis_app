@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 import {
   Player,
   PointOrMiss,
@@ -12,6 +12,8 @@ import {
   OrderOfBallState,
   PlayerNo,
   SinglesGameScore,
+  SinglesPointCount,
+  SinglesGameCount,
 } from './type';
 
 const defaultSinglseGameScoreState: SinglesGameScore = {
@@ -27,6 +29,11 @@ const defaultSinglseGameScoreState: SinglesGameScore = {
     point: [],
     miss: [],
   },
+};
+
+const defaultSinglesGameCountState: SinglesGameCount = {
+  team1Game: [],
+  team2Game: [],
 };
 
 export const gameTypeState = atom<'シングルス' | 'ダブルス' | null>({
@@ -105,4 +112,24 @@ export const servicePlayerState = atom<PlayerNo | null>({
 export const pointOrMissPlayerState = atom<PlayerNo | null>({
   key: 'pointOrMissPlayerState',
   default: null,
+});
+
+export const singlesPointCountState = selector<SinglesPointCount>({
+  key: 'singlesPointCountState',
+  get: ({ get }) => {
+    const newSinglesGameScore = get(singlesGameScoreState);
+    const player1Point = newSinglesGameScore.player1.point.length;
+    const player1Miss = newSinglesGameScore.player1.miss.length;
+    const player2Point = newSinglesGameScore.player2.point.length;
+    const player2Miss = newSinglesGameScore.player2.miss.length;
+    return {
+      team1Point: player1Point + player2Miss,
+      team2Point: player2Point + player1Miss,
+    };
+  },
+});
+
+export const singlesGameCountState = atom<SinglesGameCount>({
+  key: 'singlesGameCountState',
+  default: defaultSinglesGameCountState,
 });

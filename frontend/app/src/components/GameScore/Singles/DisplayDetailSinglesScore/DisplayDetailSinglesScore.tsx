@@ -1,14 +1,15 @@
 import React from 'react';
+import PointCount from '../../PointCount/PointCount';
 import PointOrMissArea from '../../PointOrMissArea/PointOrMissAre';
 const DisplayDetailSinglesScore = () => {
   return (
-    <div className="displayDetailSingles">
-      <div className="displayPointorMiss">
+    <div className="displaySingles">
+      <div className="displayPointOrMiss">
         <PointOrMissArea playerNo="player1" pointOrMiss="point" />
         <PointOrMissArea playerNo="player1" pointOrMiss="miss" />
       </div>
-      <div className="pointScore">1 - 1</div>
-      <div className="displayPointorMiss">
+      <PointCount />
+      <div className="displayPointOrMiss">
         <PointOrMissArea playerNo="player2" pointOrMiss="point" />
         <PointOrMissArea playerNo="player2" pointOrMiss="miss" />
       </div>

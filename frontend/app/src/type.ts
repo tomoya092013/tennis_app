@@ -8,6 +8,7 @@ export type Course = 'Cr' | 'Cr!' | 'St' | 'Md';
 export type PoachVolleyCourse = 'Cr' | 'Cr!' | '右St' | '左St';
 export type MissResult = 'N' | 'Bo' | 'So' | 'Etc';
 export type RallyCount = number;
+export type TeamGame = 'team1Game' | 'team2Game';
 
 export type GameType = {
   id: number;
@@ -20,18 +21,11 @@ export type Player = {
   playerNo: PlayerNo;
 };
 
-// export type PointOrMiss = {
-//   order: number;
-//   result: string | null;
-// };
-
-//プレイヤーが打ったサーブの情報
 export type ServeData = {
   toatal: number;
   serve: Serve;
 };
 
-//このserveはどの種類のサーブではじまったかを示すため
 export type PointOrMissDetail = {
   order: number;
   serveType: Serve | null;
@@ -56,4 +50,14 @@ export type SinglesGameScore = {
     point: PointOrMissDetail[];
     miss: PointOrMissDetail[];
   };
+};
+
+export type SinglesPointCount = {
+  team1Point: number;
+  team2Point: number;
+};
+
+export type SinglesGameCount = {
+  team1Game: SinglesPointCount[];
+  team2Game: SinglesPointCount[];
 };

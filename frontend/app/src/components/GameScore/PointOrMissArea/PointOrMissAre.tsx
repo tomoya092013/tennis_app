@@ -10,7 +10,7 @@ type Props = {
 
 const PointOrMissArea = ({ playerNo, pointOrMiss }: Props) => {
   const { singlesGameScore } = useModalPointDetail();
-  const pointOrMissStringBuilder = usePointOrMissStringBuilder();
+  const { pointOrMissStringBuilder } = usePointOrMissStringBuilder();
   return (
     <div className="detailPointorMiss">
       {singlesGameScore[playerNo][pointOrMiss].length > 0 &&
@@ -19,7 +19,11 @@ const PointOrMissArea = ({ playerNo, pointOrMiss }: Props) => {
             <div className={pointMiss.serveType === FIRST_SERVE ? 'startFirstServe' : 'startSecondServe'}>
               {pointMiss.order}
             </div>
-            <div className={pointMiss.shotType === RECEIVE ? 'resultWithReceive' : 'resultWithoutReceive'}>
+            <div
+              className={
+                pointMiss.shotType === RECEIVE && pointOrMiss === 'miss' ? 'resultWithReceive' : 'resultWithoutReceive'
+              }
+            >
               {pointOrMissStringBuilder(pointMiss)}
             </div>
           </div>

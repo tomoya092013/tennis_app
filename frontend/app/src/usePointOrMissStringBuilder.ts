@@ -11,5 +11,5 @@ export const usePointOrMissStringBuilder = () => {
     if (pointOrMiss.rallyCount && pointOrMiss.rallyCount > 2) result += `(${pointOrMiss.rallyCount})`;
     return result;
   };
-  return pointOrMissStringBuilder;
+  return { pointOrMissStringBuilder };
 };
