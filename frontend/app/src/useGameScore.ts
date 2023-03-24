@@ -3,6 +3,11 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { singlesPointCountState, singlesGameCountState } from './store';
 import { TeamGame } from './type';
 
+type TeamWinOrLose = {
+  teamGame: TeamGame;
+  point: number;
+};
+
 export const useGameScore = () => {
   const singlesPointCount = useRecoilValue(singlesPointCountState);
   const [singlseGameCount, setSinglseGameCount] = useRecoilState(singlesGameCountState);
@@ -20,26 +25,27 @@ export const useGameScore = () => {
 
   const useAddGameCount = () => {
     useEffect(() => {
-      if (team1Point > team2Point) {
-        if (team1Point >= 3 && team2Point >= 3) {
-          if (team1Point - team2Point === 2) {
-            calculateGameCount('team1Game');
-          }
-        } else {
-          if (team1Point === 4) {
-            calculateGameCount('team1Game');
-          }
-        }
-      } else {
-        if (team1Point >= 3 && team2Point >= 3) {
-          if (team2Point - team1Point === 2) {
-            calculateGameCount('team2Game');
-          }
-        } else {
-          if (team2Point === 4) {
-            calculateGameCount('team2Game');
-          }
-        }
+      if (team1Point === team2Point) return;
+
+      const winTeam: TeamWinOrLose =
+        team1Point > team2Point
+          ? { teamGame: 'team1Game', point: team1Point }
+          : { teamGame: 'team2Game', point: team2Point };
+
+      const looseTeam: TeamWinOrLose =
+        winTeam.teamGame === 'team1Game'
+          ? { teamGame: 'team2Game', point: team2Point }
+          : { teamGame: 'team1Game', point: team1Point };
+
+      // 最終ゲームは7ポイント制 タイブレーク 5ゲームだったら2-2の時しか発生しない
+
+      if (winTeam.point === 4 && looseTeam.point < 3) {
+        calculateGameCount(winTeam.teamGame);
+        return;
+      }
+
+      if (winTeam.point >= 3 && looseTeam.point >= 3 && winTeam.point - looseTeam.point === 2) {
+        calculateGameCount(winTeam.teamGame);
       }
     }, []);
   };
