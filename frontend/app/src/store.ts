@@ -9,14 +9,14 @@ import {
   PoachVolleyCourse,
   RallyCount,
   MissResult,
-  OrderOfBallState,
+  OrderBallState,
   PlayerNo,
-  SinglesGameScore,
+  SinglesOneGameScore,
   SinglesGamePoint,
   SinglesGameCount,
 } from './type';
 
-const defaultSinglseGameScoreState: SinglesGameScore = {
+export const defaultSinglseGameScoreState: SinglesOneGameScore = {
   player1: {
     player: null,
     serveData: null,
@@ -30,6 +30,8 @@ const defaultSinglseGameScoreState: SinglesGameScore = {
     miss: [],
   },
 };
+
+export const defaultOrderBallState: number = 1;
 
 const defaultSinglesGameCountState: SinglesGameCount = {
   team1Game: [],
@@ -70,9 +72,9 @@ export const rallyState = atom<boolean>({
   key: 'rallyState',
   default: false,
 });
-export const orderOfBallState = atom<OrderOfBallState>({
-  key: 'orderOfBallState',
-  default: 1,
+export const orderBallState = atom<OrderBallState>({
+  key: 'orderBallState',
+  default: defaultOrderBallState,
 });
 export const foreOrBackState = atom<ForeOrBack | null>({
   key: 'foreOrBackState',
@@ -99,11 +101,6 @@ export const rallyCountState = atom<RallyCount | null>({
   default: null,
 });
 
-export const singlesGameScoreState = atom<SinglesGameScore>({
-  key: 'singlesGameScoreState',
-  default: defaultSinglseGameScoreState,
-});
-
 export const servicePlayerState = atom<PlayerNo | null>({
   key: 'servicePlayerState',
   default: null,
@@ -117,7 +114,7 @@ export const pointOrMissPlayerState = atom<PlayerNo | null>({
 export const SinglesGamePointState = selector<SinglesGamePoint>({
   key: 'SinglesGamePointState',
   get: ({ get }) => {
-    const currentSinglesGameScore = get(singlesGameScoreState);
+    const currentSinglesGameScore = get(singlesOneGameScoreState);
     const player1Point = currentSinglesGameScore.player1.point.length;
     const player1Miss = currentSinglesGameScore.player1.miss.length;
     const player2Point = currentSinglesGameScore.player2.point.length;
@@ -134,10 +131,20 @@ export const singlesGameCountState = atom<SinglesGameCount>({
   default: defaultSinglesGameCountState,
 });
 
-export const gameCountState = selector<number>({
-  key: 'gameCountState',
+export const currentSinglesGameCountState = selector<number>({
+  key: 'currentSinglesGameCountState',
   get: ({ get }) => {
-    const currentGameCount = get(singlesGameCountState);
-    return currentGameCount.team1Game.length + currentGameCount.team2Game.length + 1;
+    const currentSinglesGameCount = get(singlesGameCountState);
+    return currentSinglesGameCount.team1Game.length + currentSinglesGameCount.team2Game.length;
   },
+});
+
+export const singlesOneGameScoreState = atom<SinglesOneGameScore>({
+  key: 'singlesGameScoreState',
+  default: defaultSinglseGameScoreState,
+});
+
+export const singlesAllOneGameScoreState = atom<SinglesOneGameScore[]>({
+  key: 'singlesAllOneGameScoreState',
+  default: [defaultSinglseGameScoreState],
 });

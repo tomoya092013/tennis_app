@@ -6,15 +6,16 @@ import { usePointOrMissStringBuilder } from '../../../usePointOrMissStringBuilde
 type Props = {
   playerNo: PlayerNo;
   pointOrMiss: PointOrMiss;
+  gameOrder: number;
 };
 
-const PointOrMissArea = ({ playerNo, pointOrMiss }: Props) => {
-  const { singlesGameScore } = useModalPointDetail();
+const PointOrMissArea = ({ playerNo, pointOrMiss, gameOrder }: Props) => {
+  const { singlesAllOneGameScore } = useModalPointDetail();
   const { pointOrMissStringBuilder } = usePointOrMissStringBuilder();
   return (
     <div className="detailPointorMiss">
-      {singlesGameScore[playerNo][pointOrMiss].length > 0 &&
-        singlesGameScore[playerNo][pointOrMiss].map((pointMiss) => (
+      {singlesAllOneGameScore[gameOrder][playerNo][pointOrMiss].length > 0 &&
+        singlesAllOneGameScore[gameOrder][playerNo][pointOrMiss].map((pointMiss) => (
           <div key={pointMiss.order} className="detailPoitOrMissData">
             <div className={pointMiss.serveType === FIRST_SERVE ? 'startFirstServe' : 'startSecondServe'}>
               {pointMiss.order}

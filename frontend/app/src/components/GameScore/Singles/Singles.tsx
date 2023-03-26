@@ -5,17 +5,12 @@ import { useModalPointDetail } from '../../../useModalPointDetail';
 import OneGameScoreDisplayOfSingles from './OneGameScoreDisplayOfSingles/OneGameScoreDisplayOfSingles';
 import GameCount from '../GameCount/GameCount';
 import PlayerState from '../PlayerState/PlayerState';
-import { useRecoilValue } from 'recoil';
-import { gameCountState } from '../../../store';
 
 const Singles = () => {
-  const { backToServeResult } = useModalPointDetail();
+  const { singlesAllOneGameScore, backToServeResult } = useModalPointDetail();
   const { serve } = useModalPointDetail();
   const { playerList } = useCreatePlayer();
-  const gameCount = useRecoilValue(gameCountState);
-
   if (playerList.length < 2) return null;
-
   const player1: Player = playerList[0];
   const player2: Player = playerList[1];
 
@@ -38,6 +33,7 @@ const Singles = () => {
           ) : null}
         </div>
       </div>
+      {/* <OneGameScoreDisplayOfSingles /> */}
       {/* マップで出す */}
 
       {/* パターン1: 1~gameCountまでのnumber型の配列を作る */}
@@ -53,10 +49,9 @@ const Singles = () => {
         // 別コンポーネントに渡してあげてもいい
       }) 
       */}
-
-      <OneGameScoreDisplayOfSingles />
-      {/* <DisplayDetailScore /> */}
-      {gameCount}
+      {singlesAllOneGameScore.map((_singlesOneGame, index) => (
+        <OneGameScoreDisplayOfSingles key={index} gameOrder={index} />
+      ))}
     </>
   );
 };
