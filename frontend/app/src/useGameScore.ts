@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { singlesPointCountState, singlesGameCountState } from './store';
+import { SinglesGamePointState, singlesGameCountState } from './store';
 import { TeamGame } from './type';
 
 type TeamWinOrLose = {
@@ -9,16 +9,16 @@ type TeamWinOrLose = {
 };
 
 export const useGameScore = () => {
-  const singlesPointCount = useRecoilValue(singlesPointCountState);
+  const SinglesGamePoint = useRecoilValue(SinglesGamePointState);
   const [singlseGameCount, setSinglseGameCount] = useRecoilState(singlesGameCountState);
-  const team1Point = singlesPointCount.team1Point;
-  const team2Point = singlesPointCount.team2Point;
-  const newSinglesPointCount = { ...singlesPointCount };
+  const team1Point = SinglesGamePoint.team1Point;
+  const team2Point = SinglesGamePoint.team2Point;
+  const newSinglesGamePoint = { ...SinglesGamePoint };
 
   const calculateGameCount = (winTeam: TeamGame) => {
     let newSinglesGameCount = { ...singlseGameCount };
     const newTeamGame = [...newSinglesGameCount[winTeam]];
-    newTeamGame.push(newSinglesPointCount);
+    newTeamGame.push(newSinglesGamePoint);
     newSinglesGameCount = { ...newSinglesGameCount, [winTeam]: newTeamGame };
     setSinglseGameCount(newSinglesGameCount);
   };
@@ -50,5 +50,5 @@ export const useGameScore = () => {
     }, []);
   };
 
-  return { singlesPointCount, singlseGameCount, useAddGameCount };
+  return { SinglesGamePoint, singlseGameCount, useAddGameCount };
 };

@@ -52,12 +52,12 @@ export type SinglesGameScore = {
   };
 };
 
-export type SinglesPointCount = {
+export type SinglesGamePoint = {
   team1Point: number;
   team2Point: number;
 };
 
 export type SinglesGameCount = {
-  team1Game: SinglesPointCount[];
-  team2Game: SinglesPointCount[];
+  team1Game: SinglesGamePoint[];
+  team2Game: SinglesGamePoint[];
 };

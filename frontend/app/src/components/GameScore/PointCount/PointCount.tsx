@@ -2,10 +2,10 @@ import React from 'react';
 import { useGameScore } from '../../../useGameScore';
 
 const PointCount = () => {
-  const { singlesPointCount } = useGameScore();
+  const { SinglesGamePoint } = useGameScore();
   return (
     <div className="pointCount">
-      {singlesPointCount.team1Point} -{singlesPointCount.team2Point}
+      {SinglesGamePoint.team1Point} -{SinglesGamePoint.team2Point}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PointCount from '../../PointCount/PointCount';
 import PointOrMissArea from '../../PointOrMissArea/PointOrMissAre';
-const DisplayDetailSinglesScore = () => {
+const OneGameScoreDisplayOfSingles = () => {
   return (
     <div className="displaySingles">
       <div className="displayPointOrMiss">
@@ -17,4 +17,4 @@ const DisplayDetailSinglesScore = () => {
   );
 };
 
-export default DisplayDetailSinglesScore;
+export default OneGameScoreDisplayOfSingles;

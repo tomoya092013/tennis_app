@@ -12,7 +12,7 @@ import {
   OrderOfBallState,
   PlayerNo,
   SinglesGameScore,
-  SinglesPointCount,
+  SinglesGamePoint,
   SinglesGameCount,
 } from './type';
 
@@ -114,8 +114,8 @@ export const pointOrMissPlayerState = atom<PlayerNo | null>({
   default: null,
 });
 
-export const singlesPointCountState = selector<SinglesPointCount>({
-  key: 'singlesPointCountState',
+export const SinglesGamePointState = selector<SinglesGamePoint>({
+  key: 'SinglesGamePointState',
   get: ({ get }) => {
     const currentSinglesGameScore = get(singlesGameScoreState);
     const player1Point = currentSinglesGameScore.player1.point.length;
@@ -132,4 +132,12 @@ export const singlesPointCountState = selector<SinglesPointCount>({
 export const singlesGameCountState = atom<SinglesGameCount>({
   key: 'singlesGameCountState',
   default: defaultSinglesGameCountState,
+});
+
+export const gameCountState = selector<number>({
+  key: 'gameCountState',
+  get: ({ get }) => {
+    const currentGameCount = get(singlesGameCountState);
+    return currentGameCount.team1Game.length + currentGameCount.team2Game.length + 1;
+  },
 });
