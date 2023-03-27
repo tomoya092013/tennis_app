@@ -33,22 +33,6 @@ const Singles = () => {
           ) : null}
         </div>
       </div>
-      {/* <OneGameScoreDisplayOfSingles /> */}
-      {/* マップで出す */}
-
-      {/* パターン1: 1~gameCountまでのnumber型の配列を作る */}
-      {/* {[1, 2, 3].map(gameCount => <OneGameScoreDisplayOfSingles gameCount={gameCount} />)} */}
-
-      {/* パターン2: 1~gameCountまでのnumber型の配列を作る
-          まず各ゲームのスコアを格納する配列Xが必要(recoil)
-      */}
-      {/* 配列XをこのSinglesコンポーネントで展開する */}
-      {/* 
-      X.map(gameScore=>{
-        // 1ゲームごとのスコア表示
-        // 別コンポーネントに渡してあげてもいい
-      }) 
-      */}
       {singlesAllOneGameScore.map((_singlesOneGame, index) => (
         <OneGameScoreDisplayOfSingles key={index} gameOrder={index} />
       ))}

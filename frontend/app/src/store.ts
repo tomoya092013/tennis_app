@@ -33,6 +33,11 @@ export const defaultSinglseGameScoreState: SinglesOneGameScore = {
 
 export const defaultOrderBallState: number = 1;
 
+const defaultSinglesGameCountState: SinglesGameCount = {
+  team1Game: [],
+  team2Game: [],
+};
+
 export const gameTypeState = atom<'シングルス' | 'ダブルス' | null>({
   key: 'gameTypeState',
   default: null,
@@ -105,11 +110,6 @@ export const pointOrMissPlayerState = atom<PlayerNo | null>({
   key: 'pointOrMissPlayerState',
   default: null,
 });
-
-const defaultSinglesGameCountState: SinglesGameCount = {
-  team1Game: [],
-  team2Game: [],
-};
 
 export const singlesGameCountState = atom<SinglesGameCount>({
   key: 'singlesGameCountState',
