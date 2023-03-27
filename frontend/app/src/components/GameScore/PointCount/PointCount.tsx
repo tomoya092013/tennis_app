@@ -1,11 +1,16 @@
 import React from 'react';
 import { useGameScore } from '../../../useGameScore';
 
-const PointCount = () => {
-  const { SinglesGamePoint } = useGameScore();
+type Props = {
+  gameOrder: number;
+};
+
+const PointCount = ({ gameOrder }: Props) => {
+  const { singlesGamePoint } = useGameScore();
+
   return (
     <div className="pointCount">
-      {SinglesGamePoint.team1Point} -{SinglesGamePoint.team2Point}
+      {singlesGamePoint[gameOrder].team1Point} - {singlesGamePoint[gameOrder].team2Point}
     </div>
   );
 };

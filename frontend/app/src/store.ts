@@ -33,11 +33,6 @@ export const defaultSinglseGameScoreState: SinglesOneGameScore = {
 
 export const defaultOrderBallState: number = 1;
 
-const defaultSinglesGameCountState: SinglesGameCount = {
-  team1Game: [],
-  team2Game: [],
-};
-
 export const gameTypeState = atom<'シングルス' | 'ダブルス' | null>({
   key: 'gameTypeState',
   default: null,
@@ -111,32 +106,14 @@ export const pointOrMissPlayerState = atom<PlayerNo | null>({
   default: null,
 });
 
-export const SinglesGamePointState = selector<SinglesGamePoint>({
-  key: 'SinglesGamePointState',
-  get: ({ get }) => {
-    const currentSinglesGameScore = get(singlesOneGameScoreState);
-    const player1Point = currentSinglesGameScore.player1.point.length;
-    const player1Miss = currentSinglesGameScore.player1.miss.length;
-    const player2Point = currentSinglesGameScore.player2.point.length;
-    const player2Miss = currentSinglesGameScore.player2.miss.length;
-    return {
-      team1Point: player1Point + player2Miss,
-      team2Point: player2Point + player1Miss,
-    };
-  },
-});
+const defaultSinglesGameCountState: SinglesGameCount = {
+  team1Game: [],
+  team2Game: [],
+};
 
 export const singlesGameCountState = atom<SinglesGameCount>({
   key: 'singlesGameCountState',
   default: defaultSinglesGameCountState,
-});
-
-export const currentSinglesGameCountState = selector<number>({
-  key: 'currentSinglesGameCountState',
-  get: ({ get }) => {
-    const currentSinglesGameCount = get(singlesGameCountState);
-    return currentSinglesGameCount.team1Game.length + currentSinglesGameCount.team2Game.length;
-  },
 });
 
 export const singlesOneGameScoreState = atom<SinglesOneGameScore>({
@@ -147,4 +124,22 @@ export const singlesOneGameScoreState = atom<SinglesOneGameScore>({
 export const singlesAllOneGameScoreState = atom<SinglesOneGameScore[]>({
   key: 'singlesAllOneGameScoreState',
   default: [defaultSinglseGameScoreState],
+});
+
+export const allSinglesGamePointState = selector<SinglesGamePoint[]>({
+  key: 'allSinglesGamePointState',
+  get: ({ get }) => {
+    const singlesAllOneGameScore = get(singlesAllOneGameScoreState);
+    const singlesAllOneGamePoint = singlesAllOneGameScore.map((currentSinglesGamePoint) => {
+      const player1Point = currentSinglesGamePoint.player1.point.length;
+      const player1Miss = currentSinglesGamePoint.player1.miss.length;
+      const player2Point = currentSinglesGamePoint.player2.point.length;
+      const player2Miss = currentSinglesGamePoint.player2.miss.length;
+      return {
+        team1Point: player1Point + player2Miss,
+        team2Point: player2Point + player1Miss,
+      };
+    });
+    return singlesAllOneGamePoint;
+  },
 });

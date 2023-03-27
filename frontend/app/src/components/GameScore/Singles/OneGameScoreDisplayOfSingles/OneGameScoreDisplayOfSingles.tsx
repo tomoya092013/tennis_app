@@ -12,7 +12,7 @@ const OneGameScoreDisplayOfSingles = ({ gameOrder }: Props) => {
         <PointOrMissArea playerNo="player1" pointOrMiss="point" gameOrder={gameOrder} />
         <PointOrMissArea playerNo="player1" pointOrMiss="miss" gameOrder={gameOrder} />
       </div>
-      <PointCount />
+      <PointCount gameOrder={gameOrder} />
       <div className="displayPointOrMiss">
         <PointOrMissArea playerNo="player2" pointOrMiss="point" gameOrder={gameOrder} />
         <PointOrMissArea playerNo="player2" pointOrMiss="miss" gameOrder={gameOrder} />
