@@ -45,7 +45,7 @@ export const gameTypeState = atom<'シングルス' | 'ダブルス' | null>({
 });
 
 export const gameMatchState = atom<5 | 7 | 9 | null>({
-  key: 'gameMatchListState',
+  key: 'gameMatchState',
   default: null,
 });
 

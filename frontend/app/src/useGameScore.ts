@@ -7,6 +7,8 @@ import {
   defaultOrderBallState,
   singlesAllOneGameScoreState,
   orderBallState,
+  gameMatchState,
+  tieBreakState,
 } from './store';
 import { TeamGame } from './type';
 
@@ -17,13 +19,18 @@ type TeamWinOrLose = {
 
 export const useGameScore = () => {
   const singlesGamePoint = useRecoilValue(allSinglesGamePointState);
+  const gameMatch = useRecoilValue(gameMatchState);
+  const tieBreak = useRecoilValue(tieBreakState);
   const currenSinglesGameOrder = singlesGamePoint.length - 1;
   const [singlseGameCount, setSinglseGameCount] = useRecoilState(singlesGameCountState);
   const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesAllOneGameScoreState);
   const setOrderBall = useSetRecoilState(orderBallState);
   const team1Point = singlesGamePoint[currenSinglesGameOrder].team1Point;
   const team2Point = singlesGamePoint[currenSinglesGameOrder].team2Point;
+  const team1Game = singlseGameCount.team1Game.length;
+  const team2Game = singlseGameCount.team2Game.length;
   const newSinglesGamePoint = { ...singlesGamePoint[currenSinglesGameOrder] };
+  const finalGame = gameMatch && Math.floor(gameMatch / 2);
 
   const calculateGameCount = (winTeam: TeamGame) => {
     let newSinglesGameCount = { ...singlseGameCount };
@@ -56,17 +63,24 @@ export const useGameScore = () => {
           ? { teamGame: 'team2Game', point: team2Point }
           : { teamGame: 'team1Game', point: team1Point };
 
-      // 最終ゲームは7ポイント制 タイブレーク 5ゲームだったら2-2の時しか発生しない
-
-      if (winTeam.point === 4 && looseTeam.point < 3) {
-        calculateGameCount(winTeam.teamGame);
-        setNextGame();
-        return;
-      }
-
-      if (winTeam.point >= 3 && looseTeam.point >= 3 && winTeam.point - looseTeam.point === 2) {
-        calculateGameCount(winTeam.teamGame);
-        setNextGame();
+      if (tieBreak === 'あり' && team1Game === finalGame && team2Game === finalGame) {
+        if (winTeam.point === 7 && looseTeam.point < 6) {
+          calculateGameCount(winTeam.teamGame);
+          return;
+        }
+        if (winTeam.point >= 6 && looseTeam.point >= 6 && winTeam.point - looseTeam.point === 2) {
+          calculateGameCount(winTeam.teamGame);
+        }
+      } else {
+        if (winTeam.point === 4 && looseTeam.point < 3) {
+          calculateGameCount(winTeam.teamGame);
+          setNextGame();
+          return;
+        }
+        if (winTeam.point >= 3 && looseTeam.point >= 3 && winTeam.point - looseTeam.point === 2) {
+          calculateGameCount(winTeam.teamGame);
+          setNextGame();
+        }
       }
     }, []);
   };
