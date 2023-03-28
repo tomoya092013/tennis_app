@@ -34,6 +34,7 @@ export const defaultSinglseGameScoreState: SinglesOneGameScore = {
 export const defaultOrderBallState: number = 1;
 
 const defaultSinglesGameCountState: SinglesGameCount = {
+  everyGameWinner: [],
   team1Game: [],
   team2Game: [],
 };

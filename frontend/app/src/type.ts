@@ -60,4 +60,5 @@ export type SinglesGamePoint = {
 export type SinglesGameCount = {
   team1Game: SinglesGamePoint[];
   team2Game: SinglesGamePoint[];
+  everyGameWinner: TeamGame[];
 };
