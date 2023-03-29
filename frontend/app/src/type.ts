@@ -1,14 +1,15 @@
 export type PlayerNo = 'player1' | 'player2';
 export type PointOrMiss = 'point' | 'miss';
+export type PointOrMissButton = boolean;
 export type OrderBallState = number;
-export type Serve = 'ファーストサーブ' | 'セカンドサーブ';
+export type Serve = 'ファーストサーブ' | 'セカンドサーブ' | 'Close';
 export type ShotType = 'Sa' | 'Df' | 'R' | 'ST' | 'V' | 'Pv' | 'Sm' | 'Etc';
 export type ForeOrBack = 'F' | 'B';
 export type Course = 'Cr' | 'Cr!' | 'St' | 'Md';
 export type PoachVolleyCourse = 'Cr' | 'Cr!' | '右St' | '左St';
 export type MissResult = 'N' | 'Bo' | 'So' | 'Etc';
 export type RallyCount = number;
-export type TeamGame = 'team1Game' | 'team2Game';
+export type Team = 'team1' | 'team2';
 
 export type GameType = {
   id: number;
@@ -28,7 +29,7 @@ export type ServeData = {
 
 export type PointOrMissDetail = {
   order: number;
-  serveType: Serve | null;
+  serve: Serve | null;
   shotType: ShotType;
   foreOrBack?: ForeOrBack | null;
   course?: Course | null;
@@ -37,7 +38,7 @@ export type PointOrMissDetail = {
   rallyCount?: RallyCount;
 };
 
-export type SinglesOneGameScore = {
+export type SinglesDetailData = {
   player1: {
     player: Player | null;
     serveData: ServeData | null;
@@ -58,7 +59,8 @@ export type SinglesGamePoint = {
 };
 
 export type SinglesGameCount = {
-  team1Game: SinglesGamePoint[];
-  team2Game: SinglesGamePoint[];
-  everyGameWinner: TeamGame[];
+  team1: SinglesGamePoint[];
+  team2: SinglesGamePoint[];
+  everyGameWinner: Team[];
+  winner: Team | null;
 };

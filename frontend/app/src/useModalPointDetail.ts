@@ -6,6 +6,7 @@ import {
   missResultState,
   orderBallState,
   poachVolleyCourseStaet,
+  pointOrMissButtonState,
   pointOrMissPlayerState,
   pointOrMissState,
   rallyCountState,
@@ -13,7 +14,7 @@ import {
   serveState,
   servicePlayerState,
   shotTypeState,
-  singlesAllOneGameScoreState,
+  singlesDetailDataState,
 } from './store';
 import {
   PointOrMissDetail,
@@ -56,6 +57,7 @@ export const SIDE_OUT = 'So';
 export const useModalPointDetail = () => {
   const [orderBall, setOrderOfBall] = useRecoilState(orderBallState);
   const [pointOrMiss, setPointOrMiss] = useRecoilState(pointOrMissState);
+  const [pointOrMissButton, setPointOrMissButton] = useRecoilState(pointOrMissButtonState);
   const [serve, setServe] = useRecoilState(serveState);
   const [rally, setRally] = useRecoilState(rallyState);
   const [foreOrBack, setForeOrBack] = useRecoilState(foreOrBackState);
@@ -67,7 +69,7 @@ export const useModalPointDetail = () => {
   const [rallyCount, setRallyCount] = useRecoilState(rallyCountState);
   const [servicePlayer, setServicePlayer] = useRecoilState(servicePlayerState);
   const [pointOrMissPlayer, setPointOrMissPlayer] = useRecoilState(pointOrMissPlayerState);
-  const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesAllOneGameScoreState);
+  const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesDetailDataState);
 
   const navigate = useNavigate();
   const { currenSinglesGameOrder } = useGameScore();
@@ -100,6 +102,7 @@ export const useModalPointDetail = () => {
   };
 
   const creaAllState = () => {
+    setPointOrMissButton(false);
     setPointOrMissPlayer(null);
     setServicePlayer(null);
     setServe(null);
@@ -116,7 +119,7 @@ export const useModalPointDetail = () => {
     if (servicePlayer === null) return;
     const newPointOrMiss: PointOrMissDetail = {
       order: orderBall,
-      serveType: SECOND_SERVE,
+      serve: SECOND_SERVE,
       shotType: DOUBLE_FAULT,
     };
     const newAllSinglesOneGameScore = [...singlesAllOneGameScore];
@@ -142,7 +145,8 @@ export const useModalPointDetail = () => {
     if (servicePlayer === null) return;
     const newPointOrMiss: PointOrMissDetail = {
       order: orderBall,
-      serveType: serve,
+      // eslint-disable-next-line object-shorthand
+      serve: serve,
       shotType: SERVICEACE,
     };
     const newAllSinglesOneGameScore = [...singlesAllOneGameScore];
@@ -161,15 +165,18 @@ export const useModalPointDetail = () => {
 
   const selectRally = () => {
     setRally(true);
+    setPointOrMissButton(true);
     navigate('/gameScore');
   };
 
   const backToServe = () => {
     setRally(false);
+    setPointOrMissButton(false);
     navigate('/modal/serve');
   };
 
   const backToServeResult = () => {
+    setPointOrMissButton(false);
     navigate('/modal/serveResult');
   };
 
@@ -221,8 +228,8 @@ export const useModalPointDetail = () => {
       if (shotType === RECEIVE) {
         const newPointOrMiss: PointOrMissDetail = {
           order: orderBall,
-          // result: `${foreOrBack + shotType + course}(${2})`,
-          serveType: serve,
+          // eslint-disable-next-line object-shorthand
+          serve: serve,
           // eslint-disable-next-line object-shorthand
           shotType: shotType,
           // eslint-disable-next-line object-shorthand
@@ -264,7 +271,8 @@ export const useModalPointDetail = () => {
     if (shotType === RECEIVE) {
       const newPointOrMiss: PointOrMissDetail = {
         order: orderBall,
-        serveType: serve,
+        // eslint-disable-next-line object-shorthand
+        serve: serve,
         shotType: RECEIVE,
         // eslint-disable-next-line object-shorthand
         foreOrBack: foreOrBack,
@@ -300,7 +308,8 @@ export const useModalPointDetail = () => {
     if (shotType === null) return;
     const newPointOrMiss: PointOrMissDetail = {
       order: orderBall,
-      serveType: serve,
+      // eslint-disable-next-line object-shorthand
+      serve: serve,
       // eslint-disable-next-line object-shorthand
       shotType: shotType,
       // eslint-disable-next-line object-shorthand
@@ -328,6 +337,7 @@ export const useModalPointDetail = () => {
     missResult,
     servicePlayer,
     singlesAllOneGameScore,
+    pointOrMissButton,
     selectServicePlayer,
     selectServe,
     addDoubleFault,

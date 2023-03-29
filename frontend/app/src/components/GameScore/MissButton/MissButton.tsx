@@ -3,13 +3,13 @@ import { Player } from '../../../type';
 import { MISS, useModalPointDetail } from '../../../useModalPointDetail';
 
 const MissButton = (player: Player) => {
-  const { serve, selectPointOrMiss } = useModalPointDetail();
+  const { pointOrMissButton, selectPointOrMiss } = useModalPointDetail();
   return (
     <button
       className="missButton"
       onClick={() => selectPointOrMiss(MISS, player.playerNo)}
-      style={{ backgroundColor: serve === null ? '' : '#bce9fc' }}
-      disabled={serve === null}
+      style={{ backgroundColor: pointOrMissButton ? '#bce9fc' : '' }}
+      disabled={!pointOrMissButton}
     >
       ミス
     </button>

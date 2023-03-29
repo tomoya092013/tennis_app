@@ -17,7 +17,7 @@ const PointOrMissArea = ({ playerNo, pointOrMiss, gameOrder }: Props) => {
       {singlesAllOneGameScore[gameOrder][playerNo][pointOrMiss].length > 0 &&
         singlesAllOneGameScore[gameOrder][playerNo][pointOrMiss].map((pointMiss) => (
           <div key={pointMiss.order} className="detailPoitOrMissData">
-            <div className={pointMiss.serveType === FIRST_SERVE ? 'startFirstServe' : 'startSecondServe'}>
+            <div className={pointMiss.serve === FIRST_SERVE ? 'startFirstServe' : 'startSecondServe'}>
               {pointMiss.order}
             </div>
             <div
