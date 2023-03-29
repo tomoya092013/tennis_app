@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { gameTypeState, playerListState } from './store';
-import { Serve } from './type';
+import { PlayerNo, Serve } from './type';
+import { useModalPointDetail } from './useModalPointDetail';
 import { useSettingNewGame } from './useSettingNewGame';
 
 export const useValidatePages = () => {
@@ -10,9 +11,11 @@ export const useValidatePages = () => {
   const gameType = useRecoilValue(gameTypeState);
   const playerList = useRecoilValue(playerListState);
   const { enabledNextButton } = useSettingNewGame();
+  const { creaAllState } = useModalPointDetail();
 
   const useValidateCreatePlayer = () => {
     useEffect(() => {
+      creaAllState();
       if (!enabledNextButton) navigate('/');
     }, []);
   };
@@ -27,10 +30,30 @@ export const useValidatePages = () => {
     }, []);
   };
 
-  const useValidateSelectServe = (serve: Serve | null) => {
+  const useValidateSelectServe = (servicePlayer: PlayerNo | null) => {
     useEffect(() => {
-      if (serve === null) navigate('/gameScore');
+      servicePlayer === null && navigate('/gameScore');
     }, []);
   };
-  return { useValidateCreatePlayer, useValidateGameScore, useValidateSelectServe };
+
+  const useValidateServeResult = (serve: Serve | null) => {
+    useEffect(() => {
+      serve === null && navigate('/modal/serve');
+      serve === 'Close' && navigate('/gameScore');
+    }, []);
+  };
+
+  const useValidateForeOrBack = (pointOrMissButton: boolean) => {
+    useEffect(() => {
+      !pointOrMissButton && navigate('/gameScore');
+    }, []);
+  };
+
+  return {
+    useValidateCreatePlayer,
+    useValidateGameScore,
+    useValidateSelectServe,
+    useValidateServeResult,
+    useValidateForeOrBack,
+  };
 };

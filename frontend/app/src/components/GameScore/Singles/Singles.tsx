@@ -21,7 +21,7 @@ const Singles = () => {
         <GameCount />
         <PlayerState {...player2} />
         <div className="backToServeResult">
-          {serve === FIRST_SERVE || SECOND_SERVE ? (
+          {serve === FIRST_SERVE || serve === SECOND_SERVE ? (
             <button
               className="backToServeResultButton"
               onClick={() => {

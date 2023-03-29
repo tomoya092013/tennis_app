@@ -74,6 +74,20 @@ export const useModalPointDetail = () => {
   const navigate = useNavigate();
   const { currenSinglesGameOrder } = useGameScore();
 
+  const creaAllState = () => {
+    setPointOrMissButton(false);
+    setPointOrMissPlayer(null);
+    setServicePlayer(null);
+    setServe(null);
+    setRally(false);
+    setPointOrMiss(null);
+    setForeOrBack(null);
+    setShotType(null);
+    setCourse(null);
+    setPoachVolleyCourse(null);
+    setMissResult(null);
+  };
+
   const selectServicePlayer = (playerNo: PlayerNo) => {
     setServicePlayer(playerNo);
     navigate('/modal/serve');
@@ -101,20 +115,6 @@ export const useModalPointDetail = () => {
     creaAllState();
   };
 
-  const creaAllState = () => {
-    setPointOrMissButton(false);
-    setPointOrMissPlayer(null);
-    setServicePlayer(null);
-    setServe(null);
-    setRally(false);
-    setPointOrMiss(null);
-    setForeOrBack(null);
-    setShotType(null);
-    setCourse(null);
-    setPoachVolleyCourse(null);
-    setMissResult(null);
-  };
-
   const addDoubleFault = () => {
     if (servicePlayer === null) return;
     const newPointOrMiss: PointOrMissDetail = {
@@ -138,6 +138,7 @@ export const useModalPointDetail = () => {
 
   const backToSelectServisePlayer = () => {
     setServicePlayer(null);
+    setServe(null);
     navigate('/gameScore');
   };
 
@@ -358,5 +359,6 @@ export const useModalPointDetail = () => {
     backToCourse,
     backToCourseOrMissResult,
     selectRallyCount,
+    creaAllState,
   };
 };
