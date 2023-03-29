@@ -58,6 +58,28 @@ export const useGameScore = () => {
     setOrderBall(defaultOrderBallState);
   };
 
+  const judgeFinalGameCount = (winTeam: TeamWinOrLose, looseTeam: TeamWinOrLose) => {
+    if (winTeam.point === 7 && looseTeam.point < 6) {
+      calculateGameCount(winTeam.team);
+      return;
+    }
+    if (winTeam.point >= 6 && looseTeam.point >= 6 && winTeam.point - looseTeam.point === 2) {
+      calculateGameCount(winTeam.team);
+    }
+  };
+
+  const judgeGameCount = (winTeam: TeamWinOrLose, looseTeam: TeamWinOrLose) => {
+    if (winTeam.point === 4 && looseTeam.point < 3) {
+      calculateGameCount(winTeam.team);
+      !judgeCloseGame(winTeam.team) && setNextGame();
+      return;
+    }
+    if (winTeam.point >= 3 && looseTeam.point >= 3 && winTeam.point - looseTeam.point === 2) {
+      calculateGameCount(winTeam.team);
+      !judgeCloseGame(winTeam.team) && setNextGame();
+    }
+  };
+
   const useAddGameCount = () => {
     useEffect(() => {
       if (team1Point === team2Point || singlesGameCount.winner !== null) return;
@@ -69,23 +91,9 @@ export const useGameScore = () => {
         winTeam.team === 'team1' ? { team: 'team2', point: team2Point } : { team: 'team1', point: team1Point };
 
       if (tieBreak === 'あり' && team1GameCount === finalGame && team2GameCount === finalGame) {
-        if (winTeam.point === 7 && looseTeam.point < 6) {
-          calculateGameCount(winTeam.team);
-          return;
-        }
-        if (winTeam.point >= 6 && looseTeam.point >= 6 && winTeam.point - looseTeam.point === 2) {
-          calculateGameCount(winTeam.team);
-        }
+        judgeFinalGameCount(winTeam, looseTeam);
       } else {
-        if (winTeam.point === 4 && looseTeam.point < 3) {
-          calculateGameCount(winTeam.team);
-          !judgeCloseGame(winTeam.team) && setNextGame();
-          return;
-        }
-        if (winTeam.point >= 3 && looseTeam.point >= 3 && winTeam.point - looseTeam.point === 2) {
-          calculateGameCount(winTeam.team);
-          !judgeCloseGame(winTeam.team) && setNextGame();
-        }
+        judgeGameCount(winTeam, looseTeam);
       }
     }, []);
   };
