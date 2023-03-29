@@ -2,16 +2,15 @@ import React from 'react';
 import { Player } from '../../../type';
 import { useCreatePlayer } from '../../../useCreatePlayer';
 import { useModalPointDetail } from '../../../useModalPointDetail';
-import DisplayDetailScore from './DisplayDetailSinglesScore/DisplayDetailSinglesScore';
+import OneGameScoreDisplayOfSingles from './OneGameScoreDisplayOfSingles/OneGameScoreDisplayOfSingles';
 import GameCount from '../GameCount/GameCount';
 import PlayerState from '../PlayerState/PlayerState';
 
 const Singles = () => {
-  const { backToServeResult } = useModalPointDetail();
+  const { singlesAllOneGameScore, backToServeResult } = useModalPointDetail();
   const { serve } = useModalPointDetail();
   const { playerList } = useCreatePlayer();
   if (playerList.length < 2) return null;
-
   const player1: Player = playerList[0];
   const player2: Player = playerList[1];
 
@@ -34,7 +33,9 @@ const Singles = () => {
           ) : null}
         </div>
       </div>
-      <DisplayDetailScore />
+      {singlesAllOneGameScore.map((_singlesOneGame, index) => (
+        <OneGameScoreDisplayOfSingles key={index} gameOrder={index} />
+      ))}
     </>
   );
 };

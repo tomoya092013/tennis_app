@@ -1,6 +1,13 @@
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { singlesPointCountState, singlesGameCountState } from './store';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  allSinglesGamePointState,
+  singlesGameCountState,
+  defaultSinglseGameScoreState,
+  defaultOrderBallState,
+  singlesAllOneGameScoreState,
+  orderBallState,
+} from './store';
 import { TeamGame } from './type';
 
 type TeamWinOrLose = {
@@ -9,16 +16,20 @@ type TeamWinOrLose = {
 };
 
 export const useGameScore = () => {
-  const singlesPointCount = useRecoilValue(singlesPointCountState);
+  const singlesGamePoint = useRecoilValue(allSinglesGamePointState);
+  const currenSinglesGameOrder = singlesGamePoint.length - 1;
+
   const [singlseGameCount, setSinglseGameCount] = useRecoilState(singlesGameCountState);
-  const team1Point = singlesPointCount.team1Point;
-  const team2Point = singlesPointCount.team2Point;
-  const newSinglesPointCount = { ...singlesPointCount };
+  const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesAllOneGameScoreState);
+  const setOrderBall = useSetRecoilState(orderBallState);
+  const team1Point = singlesGamePoint[currenSinglesGameOrder].team1Point;
+  const team2Point = singlesGamePoint[currenSinglesGameOrder].team2Point;
+  const newSinglesGamePoint = { ...singlesGamePoint[currenSinglesGameOrder] };
 
   const calculateGameCount = (winTeam: TeamGame) => {
     let newSinglesGameCount = { ...singlseGameCount };
     const newTeamGame = [...newSinglesGameCount[winTeam]];
-    newTeamGame.push(newSinglesPointCount);
+    newTeamGame.push(newSinglesGamePoint);
     newSinglesGameCount = { ...newSinglesGameCount, [winTeam]: newTeamGame };
     setSinglseGameCount(newSinglesGameCount);
   };
@@ -41,14 +52,22 @@ export const useGameScore = () => {
 
       if (winTeam.point === 4 && looseTeam.point < 3) {
         calculateGameCount(winTeam.teamGame);
+        const nextNewGame = defaultSinglseGameScoreState;
+        const newSinglesAllOneGameScore = [...singlesAllOneGameScore, nextNewGame];
+        setSinglesAllOneGameScore(newSinglesAllOneGameScore);
+        setOrderBall(defaultOrderBallState);
         return;
       }
 
       if (winTeam.point >= 3 && looseTeam.point >= 3 && winTeam.point - looseTeam.point === 2) {
         calculateGameCount(winTeam.teamGame);
+        const nextNewGame = defaultSinglseGameScoreState;
+        const newSinglesAllOneGameScore = [...singlesAllOneGameScore, nextNewGame];
+        setSinglesAllOneGameScore(newSinglesAllOneGameScore);
+        setOrderBall(defaultOrderBallState);
       }
     }, []);
   };
 
-  return { singlesPointCount, singlseGameCount, useAddGameCount };
+  return { singlseGameCount, singlesGamePoint, currenSinglesGameOrder, useAddGameCount };
 };

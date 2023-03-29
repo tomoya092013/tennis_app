@@ -4,7 +4,7 @@ import {
   courseState,
   foreOrBackState,
   missResultState,
-  orderOfBallState,
+  orderBallState,
   poachVolleyCourseStaet,
   pointOrMissPlayerState,
   pointOrMissState,
@@ -13,7 +13,7 @@ import {
   serveState,
   servicePlayerState,
   shotTypeState,
-  singlesGameScoreState,
+  singlesAllOneGameScoreState,
 } from './store';
 import {
   PointOrMissDetail,
@@ -27,6 +27,7 @@ import {
   PlayerNo,
   RallyCount,
 } from './type';
+import { useGameScore } from './useGameScore';
 
 export const FIRST_SERVE = 'ファーストサーブ';
 export const SECOND_SERVE = 'セカンドサーブ';
@@ -53,7 +54,7 @@ export const BACK_OUT = 'Bo';
 export const SIDE_OUT = 'So';
 
 export const useModalPointDetail = () => {
-  const [orderOfBall, setOrderOfBall] = useRecoilState(orderOfBallState);
+  const [orderBall, setOrderOfBall] = useRecoilState(orderBallState);
   const [pointOrMiss, setPointOrMiss] = useRecoilState(pointOrMissState);
   const [serve, setServe] = useRecoilState(serveState);
   const [rally, setRally] = useRecoilState(rallyState);
@@ -64,15 +65,15 @@ export const useModalPointDetail = () => {
   const [missResult, setMissResult] = useRecoilState(missResultState);
   // eslint-disable-next-line no-unused-vars
   const [rallyCount, setRallyCount] = useRecoilState(rallyCountState);
-  const [singlesGameScore, setSinglesGameScore] = useRecoilState(singlesGameScoreState);
   const [servicePlayer, setServicePlayer] = useRecoilState(servicePlayerState);
   const [pointOrMissPlayer, setPointOrMissPlayer] = useRecoilState(pointOrMissPlayerState);
+  const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesAllOneGameScoreState);
 
   const navigate = useNavigate();
+  const { currenSinglesGameOrder } = useGameScore();
 
   const selectServicePlayer = (playerNo: PlayerNo) => {
     setServicePlayer(playerNo);
-    // navigate('/modal/serve', { state: playerNo });
     navigate('/modal/serve');
   };
 
@@ -81,21 +82,54 @@ export const useModalPointDetail = () => {
     navigate('/modal/serveResult');
   };
 
+  const addDetailPointMiss = (newPointOrMiss: PointOrMissDetail) => {
+    if (pointOrMissPlayer === null) return;
+    if (pointOrMiss === null) return;
+    if (shotType === null) return;
+    const newAllSinglesOneGameScore = [...singlesAllOneGameScore];
+    let newSinglesOneGameScore = { ...newAllSinglesOneGameScore[currenSinglesGameOrder] };
+    let newPlayer = { ...newSinglesOneGameScore[pointOrMissPlayer] };
+    const newPointMiss = [...newPlayer[pointOrMiss]];
+    newPointMiss.push(newPointOrMiss);
+    newPlayer = { ...newPlayer, [pointOrMiss]: newPointMiss };
+    newSinglesOneGameScore = { ...newSinglesOneGameScore, [pointOrMissPlayer]: newPlayer };
+    newAllSinglesOneGameScore[currenSinglesGameOrder] = newSinglesOneGameScore;
+    setSinglesAllOneGameScore(newAllSinglesOneGameScore);
+    setOrderOfBall(orderBall + 1);
+    creaAllState();
+  };
+
+  const creaAllState = () => {
+    setPointOrMissPlayer(null);
+    setServicePlayer(null);
+    setServe(null);
+    setRally(false);
+    setPointOrMiss(null);
+    setForeOrBack(null);
+    setShotType(null);
+    setCourse(null);
+    setPoachVolleyCourse(null);
+    setMissResult(null);
+  };
+
   const addDoubleFault = () => {
     if (servicePlayer === null) return;
     const newPointOrMiss: PointOrMissDetail = {
-      order: orderOfBall,
+      order: orderBall,
       serveType: SECOND_SERVE,
       shotType: DOUBLE_FAULT,
     };
-    let newSinglesGameScore = { ...singlesGameScore };
-    let newPlayer = { ...newSinglesGameScore[servicePlayer] };
+    const newAllSinglesOneGameScore = [...singlesAllOneGameScore];
+    let newSinglesOneGameScore = { ...newAllSinglesOneGameScore[currenSinglesGameOrder] };
+    let newPlayer = { ...newSinglesOneGameScore[servicePlayer] };
     const newMiss = [...newPlayer.miss];
     newMiss.push(newPointOrMiss);
     newPlayer = { ...newPlayer, miss: newMiss };
-    newSinglesGameScore = { ...newSinglesGameScore, [servicePlayer]: newPlayer };
-    setSinglesGameScore(newSinglesGameScore);
-    setOrderOfBall(orderOfBall + 1);
+    newSinglesOneGameScore = { ...newSinglesOneGameScore, [servicePlayer]: newPlayer };
+    newAllSinglesOneGameScore[currenSinglesGameOrder] = newSinglesOneGameScore;
+    setSinglesAllOneGameScore(newAllSinglesOneGameScore);
+    setOrderOfBall(orderBall + 1);
+    creaAllState();
     navigate('/gameScore');
   };
 
@@ -107,20 +141,21 @@ export const useModalPointDetail = () => {
   const addServiceAce = () => {
     if (servicePlayer === null) return;
     const newPointOrMiss: PointOrMissDetail = {
-      order: orderOfBall,
+      order: orderBall,
       serveType: serve,
       shotType: SERVICEACE,
     };
-    let newSinglesGameScore = { ...singlesGameScore };
-    let newPlayer = { ...singlesGameScore[servicePlayer] };
+    const newAllSinglesOneGameScore = [...singlesAllOneGameScore];
+    let newSinglesOneGameScore = { ...newAllSinglesOneGameScore[currenSinglesGameOrder] };
+    let newPlayer = { ...newSinglesOneGameScore[servicePlayer] };
     const newPoint = [...newPlayer.point];
     newPoint.push(newPointOrMiss);
     newPlayer = { ...newPlayer, point: newPoint };
-    newSinglesGameScore = { ...singlesGameScore, [servicePlayer]: newPlayer };
-    setSinglesGameScore(newSinglesGameScore);
-    setOrderOfBall(orderOfBall + 1);
-    setServe(null);
-    setServicePlayer(null);
+    newSinglesOneGameScore = { ...newSinglesOneGameScore, [servicePlayer]: newPlayer };
+    newAllSinglesOneGameScore[currenSinglesGameOrder] = newSinglesOneGameScore;
+    setSinglesAllOneGameScore(newAllSinglesOneGameScore);
+    setOrderOfBall(orderBall + 1);
+    creaAllState();
     navigate('/gameScore');
   };
 
@@ -185,7 +220,7 @@ export const useModalPointDetail = () => {
     if (pointOrMiss === POINT) {
       if (shotType === RECEIVE) {
         const newPointOrMiss: PointOrMissDetail = {
-          order: orderOfBall,
+          order: orderBall,
           // result: `${foreOrBack + shotType + course}(${2})`,
           serveType: serve,
           // eslint-disable-next-line object-shorthand
@@ -196,15 +231,7 @@ export const useModalPointDetail = () => {
           course: course,
           rallyCount: 2,
         };
-        let newSinglesGameScore = { ...singlesGameScore };
-        let newPlayer = { ...newSinglesGameScore[pointOrMissPlayer] };
-        const newPoint = [...newPlayer.point];
-        newPoint.push(newPointOrMiss);
-        newPlayer = { ...newPlayer, point: newPoint };
-        newSinglesGameScore = { ...newSinglesGameScore, [pointOrMissPlayer]: newPlayer };
-        setSinglesGameScore(newSinglesGameScore);
-        setOrderOfBall(orderOfBall + 1);
-        creaAllState();
+        addDetailPointMiss(newPointOrMiss);
         navigate('/gameScore');
       } else {
         navigate('/modal/countRally');
@@ -236,7 +263,7 @@ export const useModalPointDetail = () => {
     if (pointOrMissPlayer === null) return;
     if (shotType === RECEIVE) {
       const newPointOrMiss: PointOrMissDetail = {
-        order: orderOfBall,
+        order: orderBall,
         serveType: serve,
         shotType: RECEIVE,
         // eslint-disable-next-line object-shorthand
@@ -247,14 +274,7 @@ export const useModalPointDetail = () => {
         missResult: missResult,
         rallyCount: 2,
       };
-      let newSinglesGameScore = { ...singlesGameScore };
-      let newPlayer = { ...newSinglesGameScore[pointOrMissPlayer] };
-      const newMiss = [...newPlayer.miss, newPointOrMiss];
-      newPlayer = { ...newPlayer, miss: newMiss };
-      newSinglesGameScore = { ...newSinglesGameScore, [pointOrMissPlayer]: newPlayer };
-      setSinglesGameScore(newSinglesGameScore);
-      setOrderOfBall(orderOfBall + 1);
-      creaAllState();
+      addDetailPointMiss(newPointOrMiss);
       navigate('/gameScore');
     } else {
       setMissResult(missResult);
@@ -279,7 +299,7 @@ export const useModalPointDetail = () => {
     if (pointOrMiss === null) return;
     if (shotType === null) return;
     const newPointOrMiss: PointOrMissDetail = {
-      order: orderOfBall,
+      order: orderBall,
       serveType: serve,
       // eslint-disable-next-line object-shorthand
       shotType: shotType,
@@ -294,28 +314,8 @@ export const useModalPointDetail = () => {
       // eslint-disable-next-line object-shorthand
       rallyCount: rallyCount,
     };
-    let newSinglesGameScore = { ...singlesGameScore };
-    let newPlayer = { ...newSinglesGameScore[pointOrMissPlayer] };
-    const newPointMiss = [...newPlayer[pointOrMiss], newPointOrMiss];
-    newPlayer = { ...newPlayer, [pointOrMiss]: newPointMiss };
-    newSinglesGameScore = { ...newSinglesGameScore, [pointOrMissPlayer]: newPlayer };
-    setSinglesGameScore(newSinglesGameScore);
-    setOrderOfBall(orderOfBall + 1);
-    creaAllState();
+    addDetailPointMiss(newPointOrMiss);
     navigate('/gameScore');
-  };
-
-  const creaAllState = () => {
-    setPointOrMissPlayer(null);
-    setServicePlayer(null);
-    setServe(null);
-    setRally(false);
-    setPointOrMiss(null);
-    setForeOrBack(null);
-    setShotType(null);
-    setCourse(null);
-    setPoachVolleyCourse(null);
-    setMissResult(null);
   };
 
   return {
@@ -326,8 +326,8 @@ export const useModalPointDetail = () => {
     course,
     poachVolleyCourse,
     missResult,
-    singlesGameScore,
     servicePlayer,
+    singlesAllOneGameScore,
     selectServicePlayer,
     selectServe,
     addDoubleFault,

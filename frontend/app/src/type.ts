@@ -1,6 +1,6 @@
 export type PlayerNo = 'player1' | 'player2';
 export type PointOrMiss = 'point' | 'miss';
-export type OrderOfBallState = number;
+export type OrderBallState = number;
 export type Serve = 'ファーストサーブ' | 'セカンドサーブ';
 export type ShotType = 'Sa' | 'Df' | 'R' | 'ST' | 'V' | 'Pv' | 'Sm' | 'Etc';
 export type ForeOrBack = 'F' | 'B';
@@ -37,7 +37,7 @@ export type PointOrMissDetail = {
   rallyCount?: RallyCount;
 };
 
-export type SinglesGameScore = {
+export type SinglesOneGameScore = {
   player1: {
     player: Player | null;
     serveData: ServeData | null;
@@ -52,12 +52,12 @@ export type SinglesGameScore = {
   };
 };
 
-export type SinglesPointCount = {
+export type SinglesGamePoint = {
   team1Point: number;
   team2Point: number;
 };
 
 export type SinglesGameCount = {
-  team1Game: SinglesPointCount[];
-  team2Game: SinglesPointCount[];
+  team1Game: SinglesGamePoint[];
+  team2Game: SinglesGamePoint[];
 };

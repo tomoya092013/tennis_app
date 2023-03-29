@@ -67,12 +67,12 @@
 .displaySingles{
   display: flex;
   justify-content: center;
-  padding: 5px;
 }
 
 .displayPointOrMiss{
   display: flex;
   width: 320px;
+  border-bottom: solid;
 }
 
 .pointCount{
@@ -80,6 +80,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: solid;
+
 }
 
 .detailPointorMiss{
