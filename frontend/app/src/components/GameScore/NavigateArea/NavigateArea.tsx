@@ -1,13 +1,18 @@
 import React from 'react';
+import { useGameScore } from '../../../useGameScore';
 import { useModalPointDetail } from '../../../useModalPointDetail';
 
 const NavigateArea = () => {
   const { serve } = useModalPointDetail();
+  const { singlesGameCount } = useGameScore();
 
   return (
-    <div className="navigateArea">
-      {serve === null ? <div>サービスプレーヤーを選択</div> : <div>誰のポイント？ミス？</div>}
-    </div>
+    <>
+      {serve === null && <div className="navigateArea">サービスプレーヤーを選択</div>}
+      {serve !== null && singlesGameCount.winner === null ? (
+        <div className="navigateArea">誰のポイント？ミス？</div>
+      ) : null}
+    </>
   );
 };
 
