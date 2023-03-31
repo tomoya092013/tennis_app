@@ -1,18 +1,15 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { singlesGameCountState } from '../../../store';
 import { useGameScore } from '../../../useGameScore';
 
 const GameCount = () => {
-  const singlesGameCount = useRecoilValue(singlesGameCountState);
-  const { useAddGameCount } = useGameScore();
+  const { team1GameCount, team2GameCount, singlesGameCount, useAddGameCount } = useGameScore();
   useAddGameCount();
+  const winner = singlesGameCount.winner;
 
   return (
     <div className="gameCount">
-      <div>
-        {singlesGameCount.team1Game.length} - {singlesGameCount.team2Game.length}
-      </div>
+      <div className={winner && winner === 'team1' ? 'winner' : 'teamGame'}>{team1GameCount}</div>-
+      <div className={winner && winner === 'team2' ? 'winner' : 'teamGame'}>{team2GameCount}</div>
     </div>
   );
 };

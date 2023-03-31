@@ -1,7 +1,7 @@
 import React from 'react';
 import { Player } from '../../../type';
 import { useCreatePlayer } from '../../../useCreatePlayer';
-import { useModalPointDetail } from '../../../useModalPointDetail';
+import { FIRST_SERVE, SECOND_SERVE, useModalPointDetail } from '../../../useModalPointDetail';
 import OneGameScoreDisplayOfSingles from './OneGameScoreDisplayOfSingles/OneGameScoreDisplayOfSingles';
 import GameCount from '../GameCount/GameCount';
 import PlayerState from '../PlayerState/PlayerState';
@@ -21,7 +21,7 @@ const Singles = () => {
         <GameCount />
         <PlayerState {...player2} />
         <div className="backToServeResult">
-          {serve !== null ? (
+          {serve === FIRST_SERVE || serve === SECOND_SERVE ? (
             <button
               className="backToServeResultButton"
               onClick={() => {

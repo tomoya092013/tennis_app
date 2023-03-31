@@ -12,6 +12,9 @@
 
 .gameCount{
   min-width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .player{
@@ -81,6 +84,8 @@
   justify-content: center;
   align-items: center;
   border-bottom: solid;
+  border-right: solid;
+  border-left: solid;
 
 }
 
@@ -125,8 +130,46 @@
 .startSecondServe{
   margin:  0 5px 0 0;
   border: 1px solid white;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   text-align: center;
-  line-height: 20px;
+  line-height: 25px;
+}
+
+.getGame{
+  margin:  5px;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.winner{
+  margin:  5px;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.teamPoint{
+  margin: 5px;
+  border: 1px solid white;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.teamGame{
+  margin: 5px;
+  border: 1px solid white;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
 }

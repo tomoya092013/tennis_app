@@ -6,11 +6,13 @@ type Props = {
 };
 
 const PointCount = ({ gameOrder }: Props) => {
-  const { singlesGamePoint } = useGameScore();
+  const { singlesGameCount, singlesGamePoint } = useGameScore();
+  const winTeam = singlesGameCount.everyGameWinner[gameOrder];
 
   return (
     <div className="pointCount">
-      {singlesGamePoint[gameOrder].team1Point} - {singlesGamePoint[gameOrder].team2Point}
+      <div className={winTeam === 'team1' ? 'getGame' : 'teamPoint'}> {singlesGamePoint[gameOrder].team1Point}</div>-
+      <div className={winTeam === 'team2' ? 'getGame' : 'teamPoint'}>{singlesGamePoint[gameOrder].team2Point}</div>
     </div>
   );
 };

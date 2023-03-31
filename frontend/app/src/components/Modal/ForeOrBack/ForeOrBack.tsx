@@ -1,8 +1,12 @@
 import React from 'react';
 import { FORE_HAND, BACK_HAND, useModalPointDetail } from '../../../useModalPointDetail';
+import { useValidatePages } from '../../../useValidatePage';
 
 const ForeOrBack = () => {
-  const { foreOrBack, selectForeOrBack, backToGameScoreFromForB } = useModalPointDetail();
+  const { foreOrBack, pointOrMissButton, selectForeOrBack, backToGameScoreFromForB } = useModalPointDetail();
+  const { useValidateForeOrBack } = useValidatePages();
+
+  useValidateForeOrBack(pointOrMissButton);
 
   return (
     <div className="detailArea">

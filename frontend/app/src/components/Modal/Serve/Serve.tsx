@@ -1,13 +1,11 @@
 import React from 'react';
 import { FIRST_SERVE, SECOND_SERVE, useModalPointDetail } from '../../../useModalPointDetail';
-// import { useLocation } from 'react-router-dom';
-// import { PlayerNo } from '../../../type';
+import { useValidatePages } from '../../../useValidatePage';
 
 const Serve = () => {
-  const { serve, selectServe, addDoubleFault, backToSelectServisePlayer } = useModalPointDetail();
-  // const location = useLocation();
-  // eslint-disable-next-line no-unused-vars
-  // const [playerNo, _] = useState<PlayerNo>(location.state as PlayerNo);
+  const { servicePlayer, serve, selectServe, addDoubleFault, backToSelectServisePlayer } = useModalPointDetail();
+  const { useValidateSelectServe } = useValidatePages();
+  useValidateSelectServe(servicePlayer);
 
   return (
     <div className="detailArea">

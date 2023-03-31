@@ -11,12 +11,13 @@ import {
   MissResult,
   OrderBallState,
   PlayerNo,
-  SinglesOneGameScore,
+  SinglesDetailData,
   SinglesGamePoint,
   SinglesGameCount,
+  PointOrMissButton,
 } from './type';
 
-export const defaultSinglseGameScoreState: SinglesOneGameScore = {
+export const defaultSinglesDetailDataState: SinglesDetailData = {
   player1: {
     player: null,
     serveData: null,
@@ -34,8 +35,10 @@ export const defaultSinglseGameScoreState: SinglesOneGameScore = {
 export const defaultOrderBallState: number = 1;
 
 const defaultSinglesGameCountState: SinglesGameCount = {
-  team1Game: [],
-  team2Game: [],
+  team1: [],
+  team2: [],
+  everyGameWinner: [],
+  winner: null,
 };
 
 export const gameTypeState = atom<'シングルス' | 'ダブルス' | null>({
@@ -61,6 +64,11 @@ export const playerListState = atom<Player[]>({
 export const pointOrMissState = atom<PointOrMiss | null>({
   key: 'pointOrMissState',
   default: null,
+});
+
+export const pointOrMissButtonState = atom<PointOrMissButton>({
+  key: 'pointOrMissButtonState',
+  default: false,
 });
 
 export const serveState = atom<Serve | null>({
@@ -116,20 +124,15 @@ export const singlesGameCountState = atom<SinglesGameCount>({
   default: defaultSinglesGameCountState,
 });
 
-export const singlesOneGameScoreState = atom<SinglesOneGameScore>({
-  key: 'singlesGameScoreState',
-  default: defaultSinglseGameScoreState,
-});
-
-export const singlesAllOneGameScoreState = atom<SinglesOneGameScore[]>({
-  key: 'singlesAllOneGameScoreState',
-  default: [defaultSinglseGameScoreState],
+export const singlesDetailDataState = atom<SinglesDetailData[]>({
+  key: 'singlesDetailDataState',
+  default: [defaultSinglesDetailDataState],
 });
 
 export const allSinglesGamePointState = selector<SinglesGamePoint[]>({
   key: 'allSinglesGamePointState',
   get: ({ get }) => {
-    const singlesAllOneGameScore = get(singlesAllOneGameScoreState);
+    const singlesAllOneGameScore = get(singlesDetailDataState);
     const singlesAllOneGamePoint = singlesAllOneGameScore.map((currentSinglesGamePoint) => {
       const player1Point = currentSinglesGamePoint.player1.point.length;
       const player1Miss = currentSinglesGamePoint.player1.miss.length;

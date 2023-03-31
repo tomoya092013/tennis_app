@@ -4,9 +4,9 @@ import { useValidatePages } from '../../../useValidatePage';
 
 const ServeResult = () => {
   const { serve, rally, addServiceAce, selectRally, backToServe } = useModalPointDetail();
-  const { useValidateSelectServe } = useValidatePages();
+  const { useValidateServeResult } = useValidatePages();
 
-  useValidateSelectServe(serve);
+  useValidateServeResult(serve);
 
   return (
     <div className="detailArea">
