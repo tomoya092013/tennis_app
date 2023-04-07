@@ -1,4 +1,4 @@
-.createPlayer {
+.selectPlayer {
   width: 500px;
   text-align: center;
   margin: 0 auto;
@@ -9,19 +9,16 @@
   margin: 10px;
 }
 
-#player{
-  margin-right: 5px;
+#player1{
+  margin-left: 5px;
   padding: 2px 5px;
-  height: 20px;
-  width: 60%;
 }
-
-.createPlayerButton{
-  width: 20%;
+#player2{
+  margin-left: 5px;
+  padding: 2px 5px;
 }
 
 .navigateNewGame{
-  width: 20%;
-  /* padding: 8px; */
-
+  min-width:120px ;
 }
+

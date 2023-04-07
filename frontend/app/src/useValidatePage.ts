@@ -23,10 +23,10 @@ export const useValidatePages = () => {
   const useValidateGameScore = () => {
     useEffect(() => {
       if (gameType === 'シングルス') {
-        playerList.length !== 2 && navigate('/createPlayer');
+        playerList.length !== 2 && navigate('/selectPlayer');
       } else if (gameType === 'ダブルス') {
-        playerList.length !== 4 && navigate('/createPlayer');
-      } else navigate('/createPlayer');
+        playerList.length !== 4 && navigate('/selectPlayer');
+      } else navigate('/selectPlayer');
     }, []);
   };
 

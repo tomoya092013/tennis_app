@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 import {
-  Player,
+  GamePlayer,
   PointOrMiss,
   Serve,
   ForeOrBack,
@@ -56,7 +56,7 @@ export const tieBreakState = atom<'あり' | 'なし' | null>({
   default: null,
 });
 
-export const playerListState = atom<Player[]>({
+export const playerListState = atom<GamePlayer[]>({
   key: 'playerListState',
   default: [],
 });

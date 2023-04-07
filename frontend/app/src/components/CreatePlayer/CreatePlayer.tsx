@@ -1,26 +1,27 @@
-import React from 'react';
-import CreatePlayerTitle from './CreatePlayerTitle/CreatePlayerTitle';
-import './CreatePlayer.css';
-import { useSettingNewGame, SINGLES } from '../../useSettingNewGame';
-import SelectSingles from './SelectSingles/SelectSingles';
-import SelectDoubles from './SelectDoubles/SelectDoubles';
-import { Link } from 'react-router-dom';
-import { useValidatePages } from '../../useValidatePage';
+import React, { useState } from 'react'
+import './CreatePlayer.css'
+import { useCreatePlayer } from '../../useCreatePlayer';
+import NavigateNewGameButton from './NavigateNewGameButton/NavigateNewGameButton';
+import PlayerList from './PlayerList/PlayerList';
 
 const CreatePlayer = () => {
-  const { gameType } = useSettingNewGame();
-  const { useValidateCreatePlayer } = useValidatePages();
-  useValidateCreatePlayer();
+  const [playerName, setPlayerName] = useState('');
+  const {enabledCreatePlayerButton,createPlayer} = useCreatePlayer()
+  const handleChangeCreatePlayer = (e: { target: { value: React.SetStateAction<string> } }) => {
+    setPlayerName(e.target.value);
+  };
 
   return (
-    <div className="createPlayer">
-      <CreatePlayerTitle />
-      {gameType === SINGLES ? <SelectSingles /> : <SelectDoubles />}
-      <div>
-        <Link to="/">戻る</Link>
-      </div>
+    <div className='createPlayer'>
+      <input id="player" type="text" onChange={handleChangeCreatePlayer}
+      value={playerName} placeholder='プレイヤー名を入力'/>
+      <button className='createPlayerButton' style={{backgroundColor: enabledCreatePlayerButton(playerName)? '#00ff7a':''}} 
+        disabled={!enabledCreatePlayerButton(playerName)}
+        onClick={()=>{createPlayer(playerName)}}>作成</button>
+      <PlayerList />
+      <NavigateNewGameButton />
     </div>
-  );
-};
+  )
+}
 
-export default CreatePlayer;
+export default CreatePlayer

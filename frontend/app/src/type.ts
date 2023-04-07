@@ -18,6 +18,13 @@ export type GameType = {
 };
 
 export type Player = {
+  id: number;
+  name: string;
+};
+
+// 試合中のプレイヤーの情報を表す型
+export type GamePlayer = {
+  id?: number;
   name: string;
   playerNo: PlayerNo;
 };
@@ -40,13 +47,13 @@ export type PointOrMissDetail = {
 
 export type SinglesDetailData = {
   player1: {
-    player: Player | null;
+    player: GamePlayer | null;
     serveData: ServeData | null;
     point: PointOrMissDetail[];
     miss: PointOrMissDetail[];
   };
   player2: {
-    player: Player | null;
+    player: GamePlayer | null;
     serveData: ServeData | null;
     point: PointOrMissDetail[];
     miss: PointOrMissDetail[];

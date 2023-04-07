@@ -19,7 +19,7 @@ export const useSettingNewGame = () => {
   const navigate = useNavigate();
 
   const enabledSettingNewGame = () => {
-    navigate('/createPlayer');
+    navigate('/selectPlayer');
   };
 
   const selectSingles = () => {
