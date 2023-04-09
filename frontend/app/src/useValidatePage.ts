@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { gameTypeState, playerListState } from './store';
+import { gameTypeState, gamePlayerListState } from './store';
 import { PlayerNo, Serve } from './type';
 import { useModalPointDetail } from './useModalPointDetail';
 import { useSettingNewGame } from './useSettingNewGame';
@@ -9,7 +9,7 @@ import { useSettingNewGame } from './useSettingNewGame';
 export const useValidatePages = () => {
   const navigate = useNavigate();
   const gameType = useRecoilValue(gameTypeState);
-  const playerList = useRecoilValue(playerListState);
+  const playerList = useRecoilValue(gamePlayerListState);
   const { enabledNextButton } = useSettingNewGame();
   const { creaAllState } = useModalPointDetail();
 

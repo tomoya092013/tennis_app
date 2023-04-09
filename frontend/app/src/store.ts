@@ -56,8 +56,8 @@ export const tieBreakState = atom<'あり' | 'なし' | null>({
   default: null,
 });
 
-export const playerListState = atom<GamePlayer[]>({
-  key: 'playerListState',
+export const gamePlayerListState = atom<GamePlayer[]>({
+  key: 'gamePlayerListState',
   default: [],
 });
 

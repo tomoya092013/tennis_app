@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { playerListState } from './store';
+import { gamePlayerListState } from './store';
 
 export const useSelectPlayer = () => {
   const navigate = useNavigate();
-  const [playerList, setPlayerList] = useRecoilState(playerListState);
+  const [playerList, setPlayerList] = useRecoilState(gamePlayerListState);
 
   const createSinglesPlayer = (player1: string, player2: string) => {
     setPlayerList([

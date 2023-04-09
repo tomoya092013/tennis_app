@@ -6,7 +6,6 @@ export const useGetPlayerList = () => {
   const fetchPlayerList = async () => {
     const result = await fetch('http://localhost:5001/player');
     const json: Player[] = await result.json();
-    console.log(json);
     setPlayerList(json);
   };
   useEffect(() => {
