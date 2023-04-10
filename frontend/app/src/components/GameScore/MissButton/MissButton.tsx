@@ -1,8 +1,8 @@
 import React from 'react';
-import { Player } from '../../../type';
+import { GamePlayer } from '../../../type';
 import { MISS, useModalPointDetail } from '../../../useModalPointDetail';
 
-const MissButton = (player: Player) => {
+const MissButton = (player: GamePlayer) => {
   const { pointOrMissButton, selectPointOrMiss } = useModalPointDetail();
   return (
     <button

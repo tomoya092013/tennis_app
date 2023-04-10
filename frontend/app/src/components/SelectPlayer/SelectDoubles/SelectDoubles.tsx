@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useCreatePlayer } from '../../../useCreatePlayer';
+import { useSelectPlayer } from '../../../useSelectPlayer';
 
 const SelectDoubles = () => {
   const [player1, setPlayer1] = useState('');
   const [player2, setPlayer2] = useState('');
   const [player3, setPlayer3] = useState('');
   const [player4, setPlayer4] = useState('');
-  const { enabledDoublesNextButton } = useCreatePlayer();
+  const { enabledDoublesNextButton } = useSelectPlayer();
 
   const handleChangePlayer1 = (e: { target: { value: React.SetStateAction<string> } }) => {
     setPlayer1(e.target.value);
