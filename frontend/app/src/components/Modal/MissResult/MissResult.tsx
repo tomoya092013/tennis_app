@@ -1,5 +1,8 @@
 import React from 'react';
-import { NET, BACK_OUT, SIDE_OUT, Etc, useModalPointDetail } from '../../../useModalPointDetail';
+
+import {
+    BACK_OUT, Etc, NET, SIDE_OUT, useModalPointDetail
+} from '../../../hooks/useModalPointDetail';
 
 const MissResult = () => {
   const { missResult, selectMissResult, backToCourse } = useModalPointDetail();

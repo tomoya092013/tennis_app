@@ -1,13 +1,19 @@
-import React from 'react'
-import { useCreatePlayer } from '../../../useCreatePlayer'
+import React from 'react';
+
+import { useCreatePlayer } from '../../../hooks/useCreatePlayer';
 
 const NavigateNewGameButton = () => {
-  const {navigateNewGame} = useCreatePlayer()
+  const { navigateNewGame } = useCreatePlayer();
   return (
-    <button className='navigateNewGame' onClick={()=>{navigateNewGame()}}>
-        New Game
-      </button>
-  )
-}
+    <button
+      className="navigateNewGame"
+      onClick={() => {
+        navigateNewGame();
+      }}
+    >
+      New Game
+    </button>
+  );
+};
 
-export default NavigateNewGameButton
+export default NavigateNewGameButton;

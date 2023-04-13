@@ -1,4 +1,4 @@
-import { PointOrMissDetail } from './type';
+import { PointOrMissDetail } from '../type';
 
 export const usePointOrMissStringBuilder = () => {
   const pointOrMissStringBuilder = (pointOrMiss: PointOrMissDetail): string => {

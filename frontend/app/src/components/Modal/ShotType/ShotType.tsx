@@ -1,5 +1,8 @@
 import React from 'react';
-import { RECEIVE, STROKE, VOLLEY, POACH_VOLLEY, SMASH, Etc, useModalPointDetail } from '../../../useModalPointDetail';
+
+import {
+    Etc, POACH_VOLLEY, RECEIVE, SMASH, STROKE, useModalPointDetail, VOLLEY
+} from '../../../hooks/useModalPointDetail';
 
 const ShotType = () => {
   const { shotType, backToForeOrBack, selectShotType } = useModalPointDetail();

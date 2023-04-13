@@ -1,10 +1,11 @@
 import React from 'react';
+
+import { FIRST_SERVE, SECOND_SERVE, useModalPointDetail } from '../../../hooks/useModalPointDetail';
+import { useSelectPlayer } from '../../../hooks/useSelectPlayer';
 import { GamePlayer } from '../../../type';
-import { useSelectPlayer } from '../../../useSelectPlayer';
-import { FIRST_SERVE, SECOND_SERVE, useModalPointDetail } from '../../../useModalPointDetail';
-import OneGameScoreDisplayOfSingles from './OneGameScoreDisplayOfSingles/OneGameScoreDisplayOfSingles';
 import GameCount from '../GameCount/GameCount';
 import PlayerState from '../PlayerState/PlayerState';
+import OneGameScoreDisplayOfSingles from './OneGameScoreDisplayOfSingles/OneGameScoreDisplayOfSingles';
 
 const Singles = () => {
   const { singlesAllOneGameScore, backToServeResult } = useModalPointDetail();

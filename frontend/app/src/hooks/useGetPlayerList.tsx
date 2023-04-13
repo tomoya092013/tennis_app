@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Player } from './type';
+
+import { Player } from '../type';
 
 export const useGetPlayerList = () => {
   const [playerList, setPlayerList] = useState<Player[]>([]);

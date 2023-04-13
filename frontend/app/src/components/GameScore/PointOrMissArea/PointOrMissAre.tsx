@@ -1,7 +1,10 @@
 import React from 'react';
+
+import {
+    DOUBLE_FAULT, FIRST_SERVE, RECEIVE, useModalPointDetail
+} from '../../../hooks/useModalPointDetail';
+import { usePointOrMissStringBuilder } from '../../../hooks/usePointOrMissStringBuilder';
 import { PlayerNo, PointOrMiss } from '../../../type';
-import { FIRST_SERVE, RECEIVE, DOUBLE_FAULT, useModalPointDetail } from '../../../useModalPointDetail';
-import { usePointOrMissStringBuilder } from '../../../usePointOrMissStringBuilder';
 
 type Props = {
   playerNo: PlayerNo;

@@ -1,33 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+
 import {
-  courseState,
-  foreOrBackState,
-  missResultState,
-  orderBallState,
-  poachVolleyCourseStaet,
-  pointOrMissButtonState,
-  pointOrMissPlayerState,
-  pointOrMissState,
-  rallyCountState,
-  rallyState,
-  serveState,
-  servicePlayerState,
-  shotTypeState,
-  singlesDetailDataState,
-} from './store';
+    courseState, foreOrBackState, missResultState, orderBallState, poachVolleyCourseStaet,
+    pointOrMissButtonState, pointOrMissPlayerState, pointOrMissState, rallyCountState, rallyState,
+    serveState, servicePlayerState, shotTypeState, singlesDetailDataState
+} from '../store';
 import {
-  PointOrMissDetail,
-  PointOrMiss,
-  Serve,
-  ForeOrBack,
-  ShotType,
-  Course,
-  PoachVolleyCourse,
-  MissResult,
-  PlayerNo,
-  RallyCount,
-} from './type';
+    Course, ForeOrBack, MissResult, PlayerNo, PoachVolleyCourse, PointOrMiss, PointOrMissDetail,
+    RallyCount, Serve, ShotType
+} from '../type';
 import { useGameScore } from './useGameScore';
 
 export const FIRST_SERVE = 'ファーストサーブ';

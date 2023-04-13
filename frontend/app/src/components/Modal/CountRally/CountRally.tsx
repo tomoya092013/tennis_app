@@ -1,5 +1,6 @@
 import React from 'react';
-import { useModalPointDetail } from '../../../useModalPointDetail';
+
+import { useModalPointDetail } from '../../../hooks/useModalPointDetail';
 
 const CountRally = () => {
   const { selectRallyCount, backToCourseOrMissResult } = useModalPointDetail();

@@ -1,6 +1,7 @@
 import React from 'react';
-import { useModalPointDetail } from '../../../useModalPointDetail';
-import { useValidatePages } from '../../../useValidatePage';
+
+import { useModalPointDetail } from '../../../hooks/useModalPointDetail';
+import { useValidatePages } from '../../../hooks/useValidatePage';
 
 const ServeResult = () => {
   const { serve, rally, addServiceAce, selectRally, backToServe } = useModalPointDetail();

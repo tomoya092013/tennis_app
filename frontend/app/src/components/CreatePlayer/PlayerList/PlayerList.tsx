@@ -1,5 +1,6 @@
 import React from 'react';
-import { useGetPlayerList } from '../../../useGetPlayerList';
+
+import { useGetPlayerList } from '../../../hooks/useGetPlayerList';
 
 const PlayerList = () => {
   const { playerList } = useGetPlayerList();

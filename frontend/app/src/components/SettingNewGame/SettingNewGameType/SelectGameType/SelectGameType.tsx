@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSettingNewGame, SINGLES, DOUBLES } from '../../../../useSettingNewGame';
+
+import { DOUBLES, SINGLES, useSettingNewGame } from '../../../../hooks/useSettingNewGame';
 
 const SelectGameType = () => {
   const { gameType, selectSingles, selectDoubles } = useSettingNewGame();
