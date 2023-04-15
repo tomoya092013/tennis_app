@@ -15,18 +15,17 @@ import {
   SinglesGamePoint,
   SinglesGameCount,
   PointOrMissButton,
+  ServeData,
 } from './type';
 
 export const defaultSinglesDetailDataState: SinglesDetailData = {
   player1: {
     player: null,
-    serveData: null,
     point: [],
     miss: [],
   },
   player2: {
     player: null,
-    serveData: null,
     point: [],
     miss: [],
   },
@@ -144,5 +143,33 @@ export const allSinglesGamePointState = selector<SinglesGamePoint[]>({
       };
     });
     return singlesAllOneGamePoint;
+  },
+});
+
+export const serveDataState = atom<ServeData[]>({
+  key: 'serveDataState',
+  default: [],
+});
+
+export const singlsePlayerServeDataState = selector<{
+  probabilityOfPlayer1FirstServe: number;
+  probabilityOfPlayer2FirstServe: number;
+}>({
+  key: 'singlsePlayerServeData',
+  get: ({ get }) => {
+    const allServeData = get(serveDataState);
+    const player1TotalServeCount = allServeData.filter((serveData) => serveData.playerNo === 'player1').length;
+    const player1FirstServeCount = allServeData.filter(
+      (serveData) => serveData.playerNo === 'player1' && serveData.isFirst === true
+    ).length;
+    const player2TotalServeCount = allServeData.filter((serveData) => serveData.playerNo === 'player2').length;
+    const player2FirstServeCount = allServeData.filter(
+      (serveData) => serveData.playerNo === 'player2' && serveData.isFirst === true
+    ).length;
+    const singlsePlayerServeData = {
+      probabilityOfPlayer1FirstServe: Math.round((player1FirstServeCount / player1TotalServeCount) * 100),
+      probabilityOfPlayer2FirstServe: Math.round((player2FirstServeCount / player2TotalServeCount) * 100),
+    };
+    return singlsePlayerServeData;
   },
 });

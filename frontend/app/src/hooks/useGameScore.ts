@@ -2,8 +2,15 @@ import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {
-    allSinglesGamePointState, defaultOrderBallState, defaultSinglesDetailDataState, gameMatchState,
-    orderBallState, serveState, singlesDetailDataState, singlesGameCountState, tieBreakState
+  allSinglesGamePointState,
+  defaultOrderBallState,
+  defaultSinglesDetailDataState,
+  gameMatchState,
+  orderBallState,
+  serveState,
+  singlesDetailDataState,
+  singlesGameCountState,
+  tieBreakState,
 } from '../store';
 import { Team } from '../type';
 

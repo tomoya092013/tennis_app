@@ -3,15 +3,15 @@ import './GameScore.css';
 import React from 'react';
 
 import { useSettingNewGame } from '../../hooks/useSettingNewGame';
-import { useValidatePages } from '../../hooks/useValidatePage';
+// import { useValidatePages } from '../../hooks/useValidatePage';
 import Doubles from './Doubles/Doubles';
 import NavigateArea from './NavigateArea/NavigateArea';
 import Singles from './Singles/Singles';
 
 const GameScore = () => {
-  const { useValidateGameScore } = useValidatePages();
+  // const { useValidateGameScore } = useValidatePages();
   const { gameType } = useSettingNewGame();
-  useValidateGameScore();
+  // useValidateGameScore();
 
   return (
     <div className="gameScoreArea">

@@ -173,3 +173,14 @@
   text-align: center;
   line-height: 25px;
 }
+
+.serveDataArea{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.probabilityOfFirstServe{
+  font-size: 24px;
+}
+

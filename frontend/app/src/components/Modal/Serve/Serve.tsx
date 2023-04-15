@@ -30,7 +30,7 @@ const Serve = () => {
         </button>
       </div>
       <div>
-        <button className="detailButton" onClick={() => addDoubleFault()}>
+        <button className="detailButton" onClick={() => addDoubleFault(SECOND_SERVE)}>
           ダブルフォルト
         </button>
       </div>

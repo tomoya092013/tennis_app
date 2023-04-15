@@ -30,8 +30,8 @@ export type GamePlayer = {
 };
 
 export type ServeData = {
-  toatal: number;
-  serve: Serve;
+  playerNo: PlayerNo;
+  isFirst: boolean;
 };
 
 // export type _ServeData = {
@@ -58,13 +58,11 @@ export type PointOrMissDetail = {
 export type SinglesDetailData = {
   player1: {
     player: GamePlayer | null;
-    serveData: ServeData | null;
     point: PointOrMissDetail[];
     miss: PointOrMissDetail[];
   };
   player2: {
     player: GamePlayer | null;
-    serveData: ServeData | null;
     point: PointOrMissDetail[];
     miss: PointOrMissDetail[];
   };
