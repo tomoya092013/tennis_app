@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 import {
   GamePlayer,
   PointOrMiss,
@@ -151,25 +151,42 @@ export const serveDataState = atom<ServeData[]>({
   default: [],
 });
 
-export const singlsePlayerServeDataState = selector<{
-  probabilityOfPlayer1FirstServe: number;
-  probabilityOfPlayer2FirstServe: number;
-}>({
-  key: 'singlsePlayerServeData',
-  get: ({ get }) => {
-    const allServeData = get(serveDataState);
-    const player1TotalServeCount = allServeData.filter((serveData) => serveData.playerNo === 'player1').length;
-    const player1FirstServeCount = allServeData.filter(
-      (serveData) => serveData.playerNo === 'player1' && serveData.isFirst === true
-    ).length;
-    const player2TotalServeCount = allServeData.filter((serveData) => serveData.playerNo === 'player2').length;
-    const player2FirstServeCount = allServeData.filter(
-      (serveData) => serveData.playerNo === 'player2' && serveData.isFirst === true
-    ).length;
-    const singlsePlayerServeData = {
-      probabilityOfPlayer1FirstServe: Math.round((player1FirstServeCount / player1TotalServeCount) * 100),
-      probabilityOfPlayer2FirstServe: Math.round((player2FirstServeCount / player2TotalServeCount) * 100),
-    };
-    return singlsePlayerServeData;
-  },
+export const serveListState = atomFamily<boolean[], PlayerNo | null>({
+  key: 'serveListState',
+  default: [],
 });
+
+export const serveListSelector = selectorFamily<number, PlayerNo | null>({
+  key: 'serveListSelector',
+  get:
+    (paleyrNo: PlayerNo | null) =>
+    ({ get }) => {
+      const serveList = get(serveListState(paleyrNo));
+      const serveListLength = serveList.length;
+      const isFirstServeCount = serveList.filter((isFirstServe) => isFirstServe === true).length;
+      return Math.round((isFirstServeCount / serveListLength) * 100);
+    },
+});
+
+// export const singlsePlayerServeDataState = selector<{
+//   probabilityOfPlayer1FirstServe: number;
+//   probabilityOfPlayer2FirstServe: number;
+// }>({
+//   key: 'singlsePlayerServeData',
+//   get: ({ get }) => {
+//     const allServeData = get(serveDataState);
+//     const player1TotalServeCount = allServeData.filter((serveData) => serveData.playerNo === 'player1').length;
+//     const player1FirstServeCount = allServeData.filter(
+//       (serveData) => serveData.playerNo === 'player1' && serveData.isFirst === true
+//     ).length;
+//     const player2TotalServeCount = allServeData.filter((serveData) => serveData.playerNo === 'player2').length;
+//     const player2FirstServeCount = allServeData.filter(
+//       (serveData) => serveData.playerNo === 'player2' && serveData.isFirst === true
+//     ).length;
+//     const singlsePlayerServeData = {
+//       probabilityOfPlayer1FirstServe: Math.round((player1FirstServeCount / player1TotalServeCount) * 100),
+//       probabilityOfPlayer2FirstServe: Math.round((player2FirstServeCount / player2TotalServeCount) * 100),
+//     };
+//     return singlsePlayerServeData;
+//   },
+// });

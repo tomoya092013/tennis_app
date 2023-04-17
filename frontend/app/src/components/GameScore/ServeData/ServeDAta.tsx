@@ -1,30 +1,12 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { singlsePlayerServeDataState } from '../../../store';
+import { ProbabilityOfFirstSereve } from './ProbabilityOfFirstServe';
 
 const ServeDAta = () => {
-  const singlsePlayerServeData = useRecoilValue(singlsePlayerServeDataState);
-  console.log(singlsePlayerServeData);
+  console.log('ServeDAtaがレンダリングされました');
   return (
     <div className="serveDataArea">
-      <div className="playerServeData">
-        <div className="probabilityOfFirstServe">
-          {singlsePlayerServeData.probabilityOfPlayer1FirstServe > 0
-            ? singlsePlayerServeData.probabilityOfPlayer1FirstServe
-            : 0}
-          %
-        </div>
-        ファーストサーブ
-      </div>
-      <div className="playerServeData">
-        <div className="probabilityOfFirstServe">
-          {singlsePlayerServeData.probabilityOfPlayer2FirstServe > 0
-            ? singlsePlayerServeData.probabilityOfPlayer2FirstServe
-            : 0}
-          %
-        </div>
-        ファーストサーブ
-      </div>
+      <ProbabilityOfFirstSereve playerNo={'player1'} />
+      <ProbabilityOfFirstSereve playerNo={'player2'} />
     </div>
   );
 };

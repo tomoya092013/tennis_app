@@ -2,9 +2,11 @@ import React from 'react';
 
 import { FIRST_SERVE, SECOND_SERVE, useModalPointDetail } from '../../../hooks/useModalPointDetail';
 import { useValidatePages } from '../../../hooks/useValidatePage';
+import { useServeData } from '../../../hooks/useServeData';
 
 const Serve = () => {
   const { servicePlayer, serve, selectServe, addDoubleFault, backToSelectServisePlayer } = useModalPointDetail();
+  useServeData(servicePlayer);
   const { useValidateSelectServe } = useValidatePages();
   useValidateSelectServe(servicePlayer);
 
