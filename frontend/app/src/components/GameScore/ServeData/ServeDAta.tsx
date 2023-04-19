@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProbabilityOfFirstSereve } from './ProbabilityOfFirstServe';
 
-const ServeDAta = () => {
+const ServeData = () => {
   return (
     <div className="serveDataArea">
       <ProbabilityOfFirstSereve playerNo={'player1'} />
@@ -10,4 +10,4 @@ const ServeDAta = () => {
   );
 };
 
-export default ServeDAta;
+export default ServeData;
