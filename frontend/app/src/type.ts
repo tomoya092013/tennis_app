@@ -34,16 +34,6 @@ export type ServeData = {
   isFirst: boolean;
 };
 
-// export type _ServeData = {
-//   playerId: string;
-//   isFirst:boolean ;
-// };
-
-// atom<_ServeData[]>({
-//   key: "",
-//   default:[]
-// })
-
 export type PointOrMissDetail = {
   order: number;
   serve: Serve | null;

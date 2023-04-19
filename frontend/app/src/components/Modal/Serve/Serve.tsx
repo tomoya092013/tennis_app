@@ -5,8 +5,8 @@ import { useValidatePages } from '../../../hooks/useValidatePage';
 import { useServeData } from '../../../hooks/useServeData';
 
 const Serve = () => {
-  const { servicePlayer, serve, selectServe, addDoubleFault, backToSelectServisePlayer } = useModalPointDetail();
-  useServeData(servicePlayer);
+  const { servicePlayer, serve, backToSelectServisePlayer } = useModalPointDetail();
+  const { selectServe, addDoubleFaultOrServiceAce } = useServeData(servicePlayer);
   const { useValidateSelectServe } = useValidatePages();
   useValidateSelectServe(servicePlayer);
 
@@ -32,7 +32,7 @@ const Serve = () => {
         </button>
       </div>
       <div>
-        <button className="detailButton" onClick={() => addDoubleFault(SECOND_SERVE)}>
+        <button className="detailButton" onClick={() => addDoubleFaultOrServiceAce(SECOND_SERVE, 'Df')}>
           ダブルフォルト
         </button>
       </div>

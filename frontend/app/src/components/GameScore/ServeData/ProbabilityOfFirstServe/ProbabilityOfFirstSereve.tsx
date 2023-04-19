@@ -7,8 +7,8 @@ type Props = {
 };
 
 export const ProbabilityOfFirstSereve = ({ playerNo }: Props) => {
-  console.log(playerNo);
   const { probability } = useServeData(playerNo);
+
   return (
     <div className="playerServeData">
       <div className="probabilityOfFirstServe">{probability > 0 ? probability : 0}%</div>
@@ -16,5 +16,3 @@ export const ProbabilityOfFirstSereve = ({ playerNo }: Props) => {
     </div>
   );
 };
-
-// export default ProbabilityOfFirstSereve;
