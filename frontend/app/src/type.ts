@@ -24,7 +24,7 @@ export type Player = {
 
 // 試合中のプレイヤーの情報を表す型
 export type GamePlayer = {
-  id?: number;
+  id: number;
   name: string;
   playerNo: PlayerNo;
 };
