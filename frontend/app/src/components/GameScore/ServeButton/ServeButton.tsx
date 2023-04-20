@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { useGameScore } from '../../../hooks/useGameScore';
+import { useModalPointDetail } from '../../../hooks/useModalPointDetail';
 import { GamePlayer } from '../../../type';
-import { useGameScore } from '../../../useGameScore';
-import { useModalPointDetail } from '../../../useModalPointDetail';
 
 const ServeButton = (player: GamePlayer) => {
   const { serve, selectServicePlayer } = useModalPointDetail();

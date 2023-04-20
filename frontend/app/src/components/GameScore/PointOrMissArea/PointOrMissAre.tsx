@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { RECEIVE, useModalPointDetail } from '../../../hooks/useModalPointDetail';
+import { usePointOrMissStringBuilder } from '../../../hooks/usePointOrMissStringBuilder';
 import { PlayerNo, PointOrMiss } from '../../../type';
-import { FIRST_SERVE, RECEIVE, DOUBLE_FAULT, useModalPointDetail } from '../../../useModalPointDetail';
-import { usePointOrMissStringBuilder } from '../../../usePointOrMissStringBuilder';
 
 type Props = {
   playerNo: PlayerNo;
@@ -17,12 +18,12 @@ const PointOrMissArea = ({ playerNo, pointOrMiss, gameOrder }: Props) => {
       {singlesAllOneGameScore[gameOrder][playerNo][pointOrMiss].length > 0 &&
         singlesAllOneGameScore[gameOrder][playerNo][pointOrMiss].map((pointMiss) => (
           <div key={pointMiss.order} className="detailPoitOrMissData">
-            <div className={pointMiss.serve === FIRST_SERVE ? 'startFirstServe' : 'startSecondServe'}>
+            <div className={pointMiss.serve === 'ファーストサーブ' ? 'startFirstServe' : 'startSecondServe'}>
               {pointMiss.order}
             </div>
             <div
               className={
-                (pointMiss.shotType === RECEIVE && pointOrMiss === 'miss') || pointMiss.shotType === DOUBLE_FAULT
+                (pointMiss.shotType === RECEIVE && pointOrMiss === 'miss') || pointMiss.shotType === 'Df'
                   ? 'resultWithReceive'
                   : 'resultWithoutReceive'
               }

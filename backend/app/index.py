@@ -32,9 +32,9 @@ def player():
 def create_player():
     data = request.data.decode('utf-8')
     data = json.loads(data)
-    print(data)
+    # print(data)
     name = data['name']
-    print(name)
+    # print(name)
     # DBにアクセスしてプレイヤーを登録する処理
     with connection:
         with connection.cursor() as cursor:
@@ -42,7 +42,7 @@ def create_player():
             cursor.execute(sql, [name])
             connection.commit()
             result_json = json.dumps({'result': 'ok'})
-            print(result_json)
+            # print(result_json)
     return result_json
 
 

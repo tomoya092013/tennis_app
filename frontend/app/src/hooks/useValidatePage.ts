@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { gameTypeState, gamePlayerListState } from './store';
-import { PlayerNo, Serve } from './type';
+
+import { gamePlayerListState, gameTypeState } from '../store';
+import { PlayerNo, Serve } from '../type';
 import { useModalPointDetail } from './useModalPointDetail';
 import { useSettingNewGame } from './useSettingNewGame';
 

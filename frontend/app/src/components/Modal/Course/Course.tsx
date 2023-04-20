@@ -1,5 +1,8 @@
 import React from 'react';
-import { CROSS, REVERSE_CROSS, STRATE, MIDDLE, useModalPointDetail } from '../../../useModalPointDetail';
+
+import {
+    CROSS, MIDDLE, REVERSE_CROSS, STRATE, useModalPointDetail
+} from '../../../hooks/useModalPointDetail';
 
 const Course = () => {
   const { course, selectCourse, backToShotType } = useModalPointDetail();

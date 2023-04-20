@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { gamePlayerListState } from './store';
+
+import { gamePlayerListState } from '../store';
 
 export const useSelectPlayer = () => {
   const navigate = useNavigate();

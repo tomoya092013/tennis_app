@@ -1,19 +1,17 @@
-import React from 'react';
-import NewGameTitle from './NewGameTitle/NewGameTitle';
 import './SettingNewGame.css';
-import SettingNewGameType from './SettingNewGameType/SettingNewGameType';
+
+import React from 'react';
+
+import NewGameTitle from './NewGameTitle/NewGameTitle';
 import NextButton from './SettingNewGameType/NextButton/NextButton';
-import NavigateCreatePlayerButton from '../NavigateCreatePlayerButton/NavigateCreatePlayerButton';
+import SettingNewGameType from './SettingNewGameType/SettingNewGameType';
 
 const SettingNewgame = () => {
   return (
     <div className="newGame">
       <NewGameTitle />
       <SettingNewGameType />
-      <div className='linkArea'>
-        <NavigateCreatePlayerButton />
-        <NextButton />
-      </div>
+      <NextButton />
     </div>
   );
 };

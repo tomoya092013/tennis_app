@@ -1,5 +1,6 @@
 import React from 'react';
-import { useGameScore } from '../../../useGameScore';
+
+import { useGameScore } from '../../../hooks/useGameScore';
 
 const GameCount = () => {
   const { team1GameCount, team2GameCount, singlesGameCount, useAddGameCount } = useGameScore();

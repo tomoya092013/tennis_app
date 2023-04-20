@@ -1,5 +1,8 @@
 import React from 'react';
-import { CROSS, REVERSE_CROSS, LEFT_STRATE, RIGHT_STRATE, useModalPointDetail } from '../../../useModalPointDetail';
+
+import {
+    CROSS, LEFT_STRATE, REVERSE_CROSS, RIGHT_STRATE, useModalPointDetail
+} from '../../../hooks/useModalPointDetail';
 
 const PoachCourse = () => {
   const { poachVolleyCourse, selectPoachVolleyCourse, backToShotType } = useModalPointDetail();

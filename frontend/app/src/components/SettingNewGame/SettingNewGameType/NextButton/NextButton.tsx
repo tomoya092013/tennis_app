@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSettingNewGame } from '../../../../useSettingNewGame';
+
+import { useSettingNewGame } from '../../../../hooks/useSettingNewGame';
 
 const NextButton = () => {
   const { enabledNextButton, enabledSettingNewGame } = useSettingNewGame();

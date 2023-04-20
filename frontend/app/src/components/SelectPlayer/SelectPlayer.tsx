@@ -1,13 +1,14 @@
-import React from 'react';
-import SelectPlayerTitle from './SelectPlayer/SelectPlayerTitle';
 import './SelectPlayer.css';
-import { useSettingNewGame, SINGLES } from '../../useSettingNewGame';
-import SelectSingles from './SelectSingles/SelectSingles';
-import SelectDoubles from './SelectDoubles/SelectDoubles';
+
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useValidatePages } from '../../useValidatePage';
-import { useCreatePlayer } from '../../useCreatePlayer';
-import NavigateCreatePlayerButton from '../NavigateCreatePlayerButton/NavigateCreatePlayerButton';
+
+import { useCreatePlayer } from '../../hooks/useCreatePlayer';
+import { SINGLES, useSettingNewGame } from '../../hooks/useSettingNewGame';
+import { useValidatePages } from '../../hooks/useValidatePage';
+import SelectDoubles from './SelectDoubles/SelectDoubles';
+import SelectPlayerTitle from './SelectPlayer/SelectPlayerTitle';
+import SelectSingles from './SelectSingles/SelectSingles';
 
 const SelectPlayer = () => {
   const { gameType } = useSettingNewGame();
@@ -18,8 +19,7 @@ const SelectPlayer = () => {
     <div className="selectPlayer">
       <SelectPlayerTitle />
       {gameType === SINGLES ? <SelectSingles /> : <SelectDoubles />}
-      <div className='linkArea'>
-        <NavigateCreatePlayerButton />
+      <div className="linkArea">
         <Link to="/">戻る</Link>
       </div>
     </div>

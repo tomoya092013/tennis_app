@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSelectPlayer } from '../../../useSelectPlayer';
+
+import { useSelectPlayer } from '../../../hooks/useSelectPlayer';
 
 const SelectDoubles = () => {
   const [player1, setPlayer1] = useState('');

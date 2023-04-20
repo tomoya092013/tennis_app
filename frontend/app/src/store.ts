@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom, atomFamily, selector, selectorFamily } from 'recoil';
 import {
   GamePlayer,
   PointOrMiss,
@@ -15,18 +15,17 @@ import {
   SinglesGamePoint,
   SinglesGameCount,
   PointOrMissButton,
+  ServeData,
 } from './type';
 
 export const defaultSinglesDetailDataState: SinglesDetailData = {
   player1: {
     player: null,
-    serveData: null,
     point: [],
     miss: [],
   },
   player2: {
     player: null,
-    serveData: null,
     point: [],
     miss: [],
   },
@@ -145,4 +144,26 @@ export const allSinglesGamePointState = selector<SinglesGamePoint[]>({
     });
     return singlesAllOneGamePoint;
   },
+});
+
+export const serveDataState = atom<ServeData[]>({
+  key: 'serveDataState',
+  default: [],
+});
+
+export const serveListState = atomFamily<boolean[], PlayerNo | null>({
+  key: 'serveListState',
+  default: [],
+});
+
+export const serveListSelector = selectorFamily<number, PlayerNo | null>({
+  key: 'serveListSelector',
+  get:
+    (paleyrNo: PlayerNo | null) =>
+    ({ get }) => {
+      const serveList = get(serveListState(paleyrNo));
+      const serveListLength = serveList.length;
+      const isFirstServeCount = serveList.filter((isFirstServe) => isFirstServe === true).length;
+      return serveListLength < 1 ? 0 : Math.round((isFirstServeCount / serveListLength) * 100);
+    },
 });

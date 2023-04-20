@@ -1,5 +1,8 @@
 import React from 'react';
-import { useSettingNewGame, WITH_TIEBREAK, WITHOUT_TIEBREAK } from '../../../../useSettingNewGame';
+
+import {
+    useSettingNewGame, WITH_TIEBREAK, WITHOUT_TIEBREAK
+} from '../../../../hooks/useSettingNewGame';
 
 const SelectTieBreak = () => {
   const { tieBreak, selectWithTieBreak, selectWithoutTieBreak } = useSettingNewGame();

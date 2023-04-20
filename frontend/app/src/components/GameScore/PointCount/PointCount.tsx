@@ -1,5 +1,6 @@
 import React from 'react';
-import { useGameScore } from '../../../useGameScore';
+
+import { useGameScore } from '../../../hooks/useGameScore';
 
 type Props = {
   gameOrder: number;

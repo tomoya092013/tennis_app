@@ -1,6 +1,7 @@
 import React from 'react';
+
+import { MISS, useModalPointDetail } from '../../../hooks/useModalPointDetail';
 import { GamePlayer } from '../../../type';
-import { MISS, useModalPointDetail } from '../../../useModalPointDetail';
 
 const MissButton = (player: GamePlayer) => {
   const { pointOrMissButton, selectPointOrMiss } = useModalPointDetail();

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { gameMatchState, gameTypeState, tieBreakState } from './store';
+
+import { gameMatchState, gameTypeState, tieBreakState } from '../store';
 
 export const SINGLES = 'シングルス';
 export const DOUBLES = 'ダブルス';

@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
 import {
   allSinglesGamePointState,
-  singlesGameCountState,
-  defaultSinglesDetailDataState,
   defaultOrderBallState,
-  singlesDetailDataState,
-  orderBallState,
+  defaultSinglesDetailDataState,
   gameMatchState,
-  tieBreakState,
+  orderBallState,
   serveState,
-} from './store';
-import { Team } from './type';
+  singlesDetailDataState,
+  singlesGameCountState,
+  tieBreakState,
+} from '../store';
+import { Team } from '../type';
 
 type TeamWinOrLose = {
   team: Team;
