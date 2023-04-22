@@ -5,7 +5,7 @@ import pandas as pd
 
 
 app = Flask(__name__)
-app.config['JSON_AS_ASCII'] = False
+app.config["JSON_AS_ASCII"] = False
 
 connection = psycopg2.connect(
     host="db",
@@ -22,18 +22,18 @@ def player():
         with connection.cursor() as cursor:
             sql = "SELECT* FROM public.players"
             df = pd.read_sql(sql=sql, con=connection)
-            results = df.to_dict(orient='records')
+            results = df.to_dict(orient="records")
         # print(results)
         # print(jsonify(results))
     return results
 
 
-@app.route('/player/register', methods=['POST'])
+@app.route("/player/register", methods=["POST"])
 def create_player():
-    data = request.data.decode('utf-8')
+    data = request.data.decode("utf-8")
     data = json.loads(data)
     # print(data)
-    name = data['name']
+    name = data["name"]
     # print(name)
     # DBにアクセスしてプレイヤーを登録する処理
     with connection:
@@ -41,7 +41,7 @@ def create_player():
             sql = "INSERT INTO public.players(name) VALUES (%s)"
             cursor.execute(sql, [name])
             connection.commit()
-            result_json = json.dumps({'result': 'ok'})
+            result_json = json.dumps({"result": "ok"})
             # print(result_json)
     return result_json
 

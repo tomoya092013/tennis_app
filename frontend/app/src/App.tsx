@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import SelectPlayer from './components/SelectPlayer/SelectPlayer';
 import GameScore from './components/GameScore/GameScore';
 import CountRally from './components/Modal/CountRally/CountRally';
 import Course from './components/Modal/Course/Course';
@@ -13,14 +12,15 @@ import ServeResult from './components/Modal/ServeResult/ServeResult';
 import ShotType from './components/Modal/ShotType/ShotType';
 import SettingNewgame from './components/SettingNewGame/SettingNewgame';
 import CreatePlayer from './components/CreatePlayer/CreatePlayer';
+import SelectGamePlayers from './components/SelectGamePlayers/SelectGamePlayers';
 
 const App = () => {
   return (
     <div className="app">
       <Routes>
-      <Route path="/" element={<CreatePlayer />} />
+        <Route path="/" element={<CreatePlayer />} />
         <Route path="/settingNewGame" element={<SettingNewgame />} />
-        <Route path="/selectPlayer" element={<SelectPlayer />} />
+        <Route path="/selectGamePlayers" element={<SelectGamePlayers />} />
         <Route path="/gameScore" element={<GameScore />} />
         <Route path="/modal" element={<Modal />}>
           <Route path="/modal/serve" element={<Serve />} />

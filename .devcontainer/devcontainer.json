@@ -12,6 +12,7 @@
       "extensions": ["editorconfig.editorconfig", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode","eamodio.gitlens","ms-vsliveshare.vsliveshare"],
       "settings": {
         "editor.defaultFormatter": null,
+        "python.formatting.provider": "black",
         "editor.formatOnSave": true,
         "editor.rulers": [120],
         "eslint.nodePath": "./frontend/node_modules",
@@ -30,6 +31,9 @@
         "[typescriptreact]": {
           "editor.formatOnSave": true,
           "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[python]": {
+          "editor.defaultFormatter": null
         }
       }
     }
