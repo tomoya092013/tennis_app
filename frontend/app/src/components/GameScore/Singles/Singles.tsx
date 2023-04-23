@@ -46,7 +46,7 @@ const Singles = () => {
           insertMatchData();
         }}
       >
-        サーブデータ追加
+        試合データ追加
       </button>
     </>
   );
