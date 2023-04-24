@@ -86,6 +86,24 @@ def create_match():
             execute_values(cursor, sql_gameNoData, insertGameNoData)
 
             # ポイントミスデータ
+            for item in pointOrMissData:
+                row = (
+                    match_id,
+                    item["gameNo"],
+                    item["player_id"],
+                    item["isPoint"],
+                    item["order"],
+                    item["serve"],
+                    item["shotType"],
+                    item["foreOrBack"],
+                    item["course"],
+                    item["poachVolleyCourse"],
+                    item["missResult"],
+                    item["rallyCount"],
+                )
+                insertPointOrMissData.append(row)
+            sql_pointOrMissData = "INSERT INTO public.points_misses (match_id,game_number, player_id, ispoint, pointmiss_order, serve, shot_type, fore_back, course, poach_volley_course, miss_result,rally_count) VALUES %s"
+            execute_values(cursor, sql_pointOrMissData, insertPointOrMissData)
 
     return {"result": "OK"}
 
