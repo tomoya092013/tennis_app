@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {
   courseState,
@@ -7,7 +7,7 @@ import {
   gameNoState,
   missResultState,
   orderBallState,
-  poachVolleyCourseStaet,
+  poachVolleyCourseState,
   pointOrMissButtonState,
   pointOrMissPlayerState,
   pointOrMissState,
@@ -64,10 +64,10 @@ export const useModalPointDetail = () => {
   const [foreOrBack, setForeOrBack] = useRecoilState(foreOrBackState);
   const [shotType, setShotType] = useRecoilState(shotTypeState);
   const [course, setCourse] = useRecoilState(courseState);
-  const [poachVolleyCourse, setPoachVolleyCourse] = useRecoilState(poachVolleyCourseStaet);
+  const [poachVolleyCourse, setPoachVolleyCourse] = useRecoilState(poachVolleyCourseState);
   const [missResult, setMissResult] = useRecoilState(missResultState);
   // eslint-disable-next-line no-unused-vars
-  const [rallyCount, setRallyCount] = useRecoilState(rallyCountState);
+  const setRallyCount = useSetRecoilState(rallyCountState);
   const [servicePlayer, setServicePlayer] = useRecoilState(servicePlayerState);
   const [pointOrMissPlayer, setPointOrMissPlayer] = useRecoilState(pointOrMissPlayerState);
   const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesDetailDataState);
@@ -179,6 +179,8 @@ export const useModalPointDetail = () => {
           shotType,
           foreOrBack,
           course,
+          poachVolleyCourse,
+          missResult,
           rallyCount: 2,
         };
         addDetailPointMiss(newPointOrMiss);
@@ -219,6 +221,7 @@ export const useModalPointDetail = () => {
         shotType: RECEIVE,
         foreOrBack,
         course,
+        poachVolleyCourse,
         missResult,
         rallyCount: 2,
       };

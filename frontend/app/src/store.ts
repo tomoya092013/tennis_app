@@ -95,7 +95,7 @@ export const courseState = atom<Course | null>({
   key: 'courseState',
   default: null,
 });
-export const poachVolleyCourseStaet = atom<PoachVolleyCourse | null>({
+export const poachVolleyCourseState = atom<PoachVolleyCourse | null>({
   key: 'poachVolleyCourseStaet',
   default: null,
 });

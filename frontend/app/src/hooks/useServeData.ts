@@ -1,7 +1,12 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
+  courseState,
+  foreOrBackState,
   gameNoState,
+  missResultState,
   orderBallState,
+  poachVolleyCourseState,
+  rallyCountState,
   serveListSelector,
   serveListState,
   serveState,
@@ -16,6 +21,12 @@ export type DoubleFaultOrServiceAce = 'Sa' | 'Df';
 
 export const useServeData = (playerNo: PlayerNo | null) => {
   const [orderBall, setOrderOfBall] = useRecoilState(orderBallState);
+  const foreOrBack = useRecoilValue(foreOrBackState);
+  const course = useRecoilValue(courseState);
+  const poachVolleyCourse = useRecoilValue(poachVolleyCourseState);
+  const missResult = useRecoilValue(missResultState);
+  const rallyCount = useRecoilValue(rallyCountState);
+
   const setServe = useSetRecoilState(serveState);
   const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesDetailDataState);
   const { currenSinglesGameOrder } = useGameScore();
@@ -45,6 +56,11 @@ export const useServeData = (playerNo: PlayerNo | null) => {
       order: orderBall,
       serve,
       shotType,
+      foreOrBack,
+      course,
+      poachVolleyCourse,
+      missResult,
+      rallyCount,
     };
     shotType === 'Df' && addSereveData(serve);
     const newAllSinglesOneGameScore = [...singlesAllOneGameScore];
