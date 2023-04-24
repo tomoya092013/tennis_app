@@ -3,7 +3,7 @@ import psycopg2
 import json
 import pandas as pd
 from psycopg2.extras import execute_values
-
+from datetime import date
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -47,25 +47,22 @@ def create_player():
 def create_match():
     data = request.data.decode("utf-8")
     data = json.loads(data)
-    serveData = data[0]["serveData"]
-    gameNumber = data[1]["gameNumber"]
-    pointOrMissData = data[2]["pointOrMissData"]
-
+    matchTitle = data[0]["matchTitle"]
+    serveData = data[1]["serveData"]
+    gameNumber = data[2]["gameNumber"]
+    pointOrMissData = data[3]["pointOrMissData"]
+    current_date = date.today()
     insertServeData = []
     insertGameNoData = []
     insertPointOrMissData = []
 
-    print(pointOrMissData)
-
     with connection:
         with connection.cursor() as cursor:
-            cursor.execute("SET timezone = 'Asia/Tokyo';")
             sql_match = (
-                "INSERT INTO public.matches(date)VALUES (CURRENT_DATE) RETURNING id"
+                "INSERT INTO public.matches (date, title)VALUES (%s, %s) RETURNING id"
             )
-            df = pd.read_sql(sql=sql_match, con=connection)
-            results = df.to_dict(orient="records")
-            match_id = results[0]["id"]
+            cursor.execute(sql_match, (current_date, matchTitle))
+            match_id = cursor.fetchone()[0]
 
             # サーブデータ
             for item in serveData:

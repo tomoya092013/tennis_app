@@ -8,18 +8,20 @@ export const useInsertMatchData = () => {
   const singlesDetailData = useRecoilValue(singlesDetailDataState);
 
   const insertMatchData = () => {
-    //サーブデータ
+    const gamePlayer1 = gamePlayer[0].name;
+    const gamePlayer2 = gamePlayer[1].name;
+    const matchTitle = `${gamePlayer1} vs ${gamePlayer2}`;
+
     const serveData1 = player1ServeData.map((serveData) => ({ playerId: gamePlayer[0].id, isFirst: serveData }));
     const serveData2 = player2ServeData.map((serveData) => ({ playerId: gamePlayer[1].id, isFirst: serveData }));
     const serveData = serveData1.concat(...serveData2);
 
-    //ゲームの長さ
     const gameNumber = [];
     const gameLength = singlesDetailData.length;
     for (let i = 1; i <= gameLength; i++) {
       gameNumber.push(i);
     }
-    //ポイントミスデータ
+
     const pointOrMissData = [];
     const pointData1 = [];
     const missData1 = [];
@@ -56,7 +58,7 @@ export const useInsertMatchData = () => {
 
     pointOrMissData.push(...payer1PointData, ...player1MissData, ...player2PointData, ...player2MissData);
 
-    const body = [{ serveData }, { gameNumber }, { pointOrMissData }];
+    const body = [{ matchTitle }, { serveData }, { gameNumber }, { pointOrMissData }];
 
     // console.log(JSON.stringify(allServeDataList));
     fetch('http://localhost:5001/match/register', { method: 'POST', body: JSON.stringify(body) });
