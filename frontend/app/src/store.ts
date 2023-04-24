@@ -167,3 +167,8 @@ export const serveListSelector = selectorFamily<number, PlayerNo | null>({
       return serveListLength < 1 ? 0 : Math.round((isFirstServeCount / serveListLength) * 100);
     },
 });
+
+export const gameNoState = atom<number>({
+  key: 'gameNoState',
+  default: 1,
+});

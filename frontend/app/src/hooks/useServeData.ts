@@ -1,5 +1,12 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { orderBallState, serveListSelector, serveListState, serveState, singlesDetailDataState } from '../store';
+import {
+  gameNoState,
+  orderBallState,
+  serveListSelector,
+  serveListState,
+  serveState,
+  singlesDetailDataState,
+} from '../store';
 import { PlayerNo, PointOrMissDetail, Serve } from '../type';
 import { useNavigate } from 'react-router-dom';
 import { useGameScore } from './useGameScore';
@@ -16,6 +23,7 @@ export const useServeData = (playerNo: PlayerNo | null) => {
   const navigate = useNavigate();
   const [isFirstServe, setIsFirstServe] = useRecoilState(serveListState(playerNo));
   const probability = useRecoilValue(serveListSelector(playerNo));
+  const gameNo = useRecoilValue(gameNoState);
 
   const selectServe = (serve: Serve) => {
     setServe(serve);
@@ -33,6 +41,7 @@ export const useServeData = (playerNo: PlayerNo | null) => {
   const addDoubleFaultOrServiceAce = (serve: Serve | null, shotType: DoubleFaultOrServiceAce) => {
     if (playerNo === null) return;
     const newPointOrMiss: PointOrMissDetail = {
+      gameNo,
       order: orderBall,
       serve,
       shotType,

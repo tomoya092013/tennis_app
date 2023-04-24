@@ -35,6 +35,7 @@ export type ServeData = {
 };
 
 export type PointOrMissDetail = {
+  gameNo: number;
   order: number;
   serve: Serve | null;
   shotType: ShotType;

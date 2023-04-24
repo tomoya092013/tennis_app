@@ -49,16 +49,23 @@ def create_match():
     data = json.loads(data)
     serveData = data[0]["serveData"]
     gameNumber = data[1]["gameNumber"]
+    pointOrMissData = data[2]["pointOrMissData"]
+
     insertServeData = []
     insertGameNoData = []
+    insertPointOrMissData = []
+
+    print(pointOrMissData)
 
     with connection:
         with connection.cursor() as cursor:
             cursor.execute("SET timezone = 'Asia/Tokyo';")
-            sql_match = "INSERT INTO public.matches(date)VALUES (CURRENT_DATE) RETURNING match_id"
+            sql_match = (
+                "INSERT INTO public.matches(date)VALUES (CURRENT_DATE) RETURNING id"
+            )
             df = pd.read_sql(sql=sql_match, con=connection)
             results = df.to_dict(orient="records")
-            match_id = results[0]["match_id"]
+            match_id = results[0]["id"]
 
             # サーブデータ
             for item in serveData:
@@ -77,6 +84,8 @@ def create_match():
                 "INSERT INTO public.games (game_number, match_id) VALUES %s"
             )
             execute_values(cursor, sql_gameNoData, insertGameNoData)
+
+            # ポイントミスデータ
 
     return {"result": "OK"}
 

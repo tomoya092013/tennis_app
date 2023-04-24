@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import {
   courseState,
   foreOrBackState,
+  gameNoState,
   missResultState,
   orderBallState,
   poachVolleyCourseStaet,
@@ -71,10 +72,10 @@ export const useModalPointDetail = () => {
   const [pointOrMissPlayer, setPointOrMissPlayer] = useRecoilState(pointOrMissPlayerState);
   const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesDetailDataState);
   const [serveData, setServeData] = useRecoilState(serveDataState);
+  const gameNo = useRecoilValue(gameNoState);
 
   const navigate = useNavigate();
   const { currenSinglesGameOrder } = useGameScore();
-
   const { resetModalState } = useResetModalState();
 
   const selectServicePlayer = (playerNo: PlayerNo) => {
@@ -172,15 +173,12 @@ export const useModalPointDetail = () => {
     if (pointOrMiss === POINT) {
       if (shotType === RECEIVE) {
         const newPointOrMiss: PointOrMissDetail = {
+          gameNo,
           order: orderBall,
-          // eslint-disable-next-line object-shorthand
-          serve: serve,
-          // eslint-disable-next-line object-shorthand
-          shotType: shotType,
-          // eslint-disable-next-line object-shorthand
-          foreOrBack: foreOrBack,
-          // eslint-disable-next-line object-shorthand
-          course: course,
+          serve,
+          shotType,
+          foreOrBack,
+          course,
           rallyCount: 2,
         };
         addDetailPointMiss(newPointOrMiss);
@@ -215,16 +213,13 @@ export const useModalPointDetail = () => {
     if (pointOrMissPlayer === null) return;
     if (shotType === RECEIVE) {
       const newPointOrMiss: PointOrMissDetail = {
+        gameNo,
         order: orderBall,
-        // eslint-disable-next-line object-shorthand
-        serve: serve,
+        serve,
         shotType: RECEIVE,
-        // eslint-disable-next-line object-shorthand
-        foreOrBack: foreOrBack,
-        // eslint-disable-next-line object-shorthand
-        course: course,
-        // eslint-disable-next-line object-shorthand
-        missResult: missResult,
+        foreOrBack,
+        course,
+        missResult,
         rallyCount: 2,
       };
       addDetailPointMiss(newPointOrMiss);
@@ -252,21 +247,15 @@ export const useModalPointDetail = () => {
     if (pointOrMiss === null) return;
     if (shotType === null) return;
     const newPointOrMiss: PointOrMissDetail = {
+      gameNo,
       order: orderBall,
-      // eslint-disable-next-line object-shorthand
-      serve: serve,
-      // eslint-disable-next-line object-shorthand
-      shotType: shotType,
-      // eslint-disable-next-line object-shorthand
-      foreOrBack: foreOrBack,
-      // eslint-disable-next-line object-shorthand
-      course: course,
-      // eslint-disable-next-line object-shorthand
-      poachVolleyCourse: poachVolleyCourse,
-      // eslint-disable-next-line object-shorthand
-      missResult: missResult,
-      // eslint-disable-next-line object-shorthand
-      rallyCount: rallyCount,
+      serve,
+      shotType,
+      foreOrBack,
+      course,
+      poachVolleyCourse,
+      missResult,
+      rallyCount,
     };
     addDetailPointMiss(newPointOrMiss);
     navigate('/gameScore');
