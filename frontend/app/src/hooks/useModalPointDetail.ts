@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import {
   courseState,
   foreOrBackState,
+  gameNoState,
   missResultState,
   orderBallState,
-  poachVolleyCourseStaet,
+  poachVolleyCourseState,
   pointOrMissButtonState,
   pointOrMissPlayerState,
   pointOrMissState,
@@ -63,18 +64,18 @@ export const useModalPointDetail = () => {
   const [foreOrBack, setForeOrBack] = useRecoilState(foreOrBackState);
   const [shotType, setShotType] = useRecoilState(shotTypeState);
   const [course, setCourse] = useRecoilState(courseState);
-  const [poachVolleyCourse, setPoachVolleyCourse] = useRecoilState(poachVolleyCourseStaet);
+  const [poachVolleyCourse, setPoachVolleyCourse] = useRecoilState(poachVolleyCourseState);
   const [missResult, setMissResult] = useRecoilState(missResultState);
   // eslint-disable-next-line no-unused-vars
-  const [rallyCount, setRallyCount] = useRecoilState(rallyCountState);
+  const setRallyCount = useSetRecoilState(rallyCountState);
   const [servicePlayer, setServicePlayer] = useRecoilState(servicePlayerState);
   const [pointOrMissPlayer, setPointOrMissPlayer] = useRecoilState(pointOrMissPlayerState);
   const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesDetailDataState);
   const [serveData, setServeData] = useRecoilState(serveDataState);
+  const gameNo = useRecoilValue(gameNoState);
 
   const navigate = useNavigate();
   const { currenSinglesGameOrder } = useGameScore();
-
   const { resetModalState } = useResetModalState();
 
   const selectServicePlayer = (playerNo: PlayerNo) => {
@@ -172,15 +173,14 @@ export const useModalPointDetail = () => {
     if (pointOrMiss === POINT) {
       if (shotType === RECEIVE) {
         const newPointOrMiss: PointOrMissDetail = {
+          gameNo,
           order: orderBall,
-          // eslint-disable-next-line object-shorthand
-          serve: serve,
-          // eslint-disable-next-line object-shorthand
-          shotType: shotType,
-          // eslint-disable-next-line object-shorthand
-          foreOrBack: foreOrBack,
-          // eslint-disable-next-line object-shorthand
-          course: course,
+          serve,
+          shotType,
+          foreOrBack,
+          course,
+          poachVolleyCourse,
+          missResult,
           rallyCount: 2,
         };
         addDetailPointMiss(newPointOrMiss);
@@ -215,16 +215,14 @@ export const useModalPointDetail = () => {
     if (pointOrMissPlayer === null) return;
     if (shotType === RECEIVE) {
       const newPointOrMiss: PointOrMissDetail = {
+        gameNo,
         order: orderBall,
-        // eslint-disable-next-line object-shorthand
-        serve: serve,
+        serve,
         shotType: RECEIVE,
-        // eslint-disable-next-line object-shorthand
-        foreOrBack: foreOrBack,
-        // eslint-disable-next-line object-shorthand
-        course: course,
-        // eslint-disable-next-line object-shorthand
-        missResult: missResult,
+        foreOrBack,
+        course,
+        poachVolleyCourse,
+        missResult,
         rallyCount: 2,
       };
       addDetailPointMiss(newPointOrMiss);
@@ -252,21 +250,15 @@ export const useModalPointDetail = () => {
     if (pointOrMiss === null) return;
     if (shotType === null) return;
     const newPointOrMiss: PointOrMissDetail = {
+      gameNo,
       order: orderBall,
-      // eslint-disable-next-line object-shorthand
-      serve: serve,
-      // eslint-disable-next-line object-shorthand
-      shotType: shotType,
-      // eslint-disable-next-line object-shorthand
-      foreOrBack: foreOrBack,
-      // eslint-disable-next-line object-shorthand
-      course: course,
-      // eslint-disable-next-line object-shorthand
-      poachVolleyCourse: poachVolleyCourse,
-      // eslint-disable-next-line object-shorthand
-      missResult: missResult,
-      // eslint-disable-next-line object-shorthand
-      rallyCount: rallyCount,
+      serve,
+      shotType,
+      foreOrBack,
+      course,
+      poachVolleyCourse,
+      missResult,
+      rallyCount,
     };
     addDetailPointMiss(newPointOrMiss);
     navigate('/gameScore');

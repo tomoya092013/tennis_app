@@ -3,7 +3,7 @@ import {
   courseState,
   foreOrBackState,
   missResultState,
-  poachVolleyCourseStaet,
+  poachVolleyCourseState,
   pointOrMissButtonState,
   pointOrMissPlayerState,
   pointOrMissState,
@@ -24,7 +24,7 @@ export const useResetModalState = () => {
     foreOrBackState,
     shotTypeState,
     courseState,
-    poachVolleyCourseStaet,
+    poachVolleyCourseState,
     missResultState,
   ];
   const resetModalState = useRecoilCallback(({ reset }) => () => {

@@ -7,11 +7,19 @@ import GameCount from '../GameCount/GameCount';
 import PlayerState from '../PlayerState/PlayerState';
 import OneGameScoreDisplayOfSingles from './OneGameScoreDisplayOfSingles/OneGameScoreDisplayOfSingles';
 import ServeData from '../ServeData/ServeDAta';
+import { useInsertMatchData } from '../../../hooks/useInsertMatchData';
+import { useRecoilValue } from 'recoil';
+import { gameNoState } from '../../../store';
 
 const Singles = () => {
   const { singlesAllOneGameScore, backToServeResult } = useModalPointDetail();
   const { serve } = useModalPointDetail();
   const { gamePlayerList } = useSelectGamePlayer();
+  const { insertMatchData } = useInsertMatchData();
+
+  const gameNo = useRecoilValue(gameNoState);
+  console.log(gameNo);
+
   if (gamePlayerList.length < 2) return null;
   const gamePlayer1: GamePlayer = gamePlayerList[0];
   const gamePlayer2: GamePlayer = gamePlayerList[1];
@@ -39,6 +47,13 @@ const Singles = () => {
         <OneGameScoreDisplayOfSingles key={index} gameOrder={index} />
       ))}
       <ServeData />
+      <button
+        onClick={() => {
+          insertMatchData();
+        }}
+      >
+        試合データ追加
+      </button>
     </>
   );
 };

@@ -2,7 +2,8 @@ from flask import Flask, request
 import psycopg2
 import json
 import pandas as pd
-
+from psycopg2.extras import execute_values
+from datetime import date
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -23,8 +24,6 @@ def player():
             sql = "SELECT* FROM public.players"
             df = pd.read_sql(sql=sql, con=connection)
             results = df.to_dict(orient="records")
-        # print(results)
-        # print(jsonify(results))
     return results
 
 
@@ -32,9 +31,7 @@ def player():
 def create_player():
     data = request.data.decode("utf-8")
     data = json.loads(data)
-    # print(data)
     name = data["name"]
-    # print(name)
     # DBにアクセスしてプレイヤーを登録する処理
     with connection:
         with connection.cursor() as cursor:
@@ -42,8 +39,70 @@ def create_player():
             cursor.execute(sql, [name])
             connection.commit()
             result_json = json.dumps({"result": "ok"})
-            # print(result_json)
+            print(result_json)
     return result_json
+
+
+@app.route("/match/register", methods=["POST"])
+def create_match():
+    data = request.data.decode("utf-8")
+    data = json.loads(data)
+    matchTitle = data[0]["matchTitle"]
+    serveData = data[1]["serveData"]
+    gameNumber = data[2]["gameNumber"]
+    pointOrMissData = data[3]["pointOrMissData"]
+    current_date = date.today()
+    insertServeData = []
+    insertGameNoData = []
+    insertPointOrMissData = []
+
+    with connection:
+        with connection.cursor() as cursor:
+            sql_match = (
+                "INSERT INTO public.matches (date, title)VALUES (%s, %s) RETURNING id"
+            )
+            cursor.execute(sql_match, (current_date, matchTitle))
+            match_id = cursor.fetchone()[0]
+
+            # サーブデータ
+            for item in serveData:
+                row = (match_id, item["playerId"], item["isFirst"])
+                insertServeData.append(row)
+            sql_serveData = (
+                "INSERT INTO public.serves (match_id, player_id, isfirst)VALUES %s"
+            )
+            execute_values(cursor, sql_serveData, insertServeData)
+
+            # ゲームの数
+            for item in gameNumber:
+                row = (item, match_id)
+                insertGameNoData.append(row)
+            sql_gameNoData = (
+                "INSERT INTO public.games (game_number, match_id) VALUES %s"
+            )
+            execute_values(cursor, sql_gameNoData, insertGameNoData)
+
+            # ポイントミスデータ
+            for item in pointOrMissData:
+                row = (
+                    match_id,
+                    item["gameNo"],
+                    item["player_id"],
+                    item["isPoint"],
+                    item["order"],
+                    item["serve"],
+                    item["shotType"],
+                    item["foreOrBack"],
+                    item["course"],
+                    item["poachVolleyCourse"],
+                    item["missResult"],
+                    item["rallyCount"],
+                )
+                insertPointOrMissData.append(row)
+            sql_pointOrMissData = "INSERT INTO public.points_misses (match_id,game_number, player_id, ispoint, pointmiss_order, serve, shot_type, fore_back, course, poach_volley_course, miss_result,rally_count) VALUES %s"
+            execute_values(cursor, sql_pointOrMissData, insertPointOrMissData)
+
+    return {"result": "OK"}
 
 
 if __name__ == "__main__":

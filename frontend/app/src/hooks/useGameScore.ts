@@ -6,6 +6,7 @@ import {
   defaultOrderBallState,
   defaultSinglesDetailDataState,
   gameMatchState,
+  gameNoState,
   orderBallState,
   serveState,
   singlesDetailDataState,
@@ -27,6 +28,8 @@ export const useGameScore = () => {
   const [singlesAllOneGameScore, setSinglesAllOneGameScore] = useRecoilState(singlesDetailDataState);
   const setOrderBall = useSetRecoilState(orderBallState);
   const setServe = useSetRecoilState(serveState);
+  const setGameNo = useSetRecoilState(gameNoState);
+  const defaultGameNo = 1;
   const currenSinglesGameOrder = singlesGamePoint.length - 1;
   const team1Point = singlesGamePoint[currenSinglesGameOrder].team1Point;
   const team2Point = singlesGamePoint[currenSinglesGameOrder].team2Point;
@@ -39,6 +42,11 @@ export const useGameScore = () => {
     return singlesGameCount[winTeam].length === finalGame;
   };
 
+  const finalize = () => {
+    setServe('Close');
+    setGameNo(defaultGameNo);
+  };
+
   const calculateGameCount = (winTeam: Team) => {
     let newSinglesGameCount = { ...singlesGameCount };
     const newGamePoint = [...newSinglesGameCount[winTeam]];
@@ -48,7 +56,7 @@ export const useGameScore = () => {
     newSinglesGameCount = judgeCloseGame(winTeam)
       ? { ...newSinglesGameCount, [winTeam]: newGamePoint, everyGameWinner: newEveryGameWinner, winner: winTeam }
       : { ...newSinglesGameCount, [winTeam]: newGamePoint, everyGameWinner: newEveryGameWinner };
-    judgeCloseGame(winTeam) && setServe('Close');
+    judgeCloseGame(winTeam) && finalize();
     setSinglseGameCount(newSinglesGameCount);
   };
 
@@ -57,6 +65,7 @@ export const useGameScore = () => {
     const newSinglesAllOneGameScore = [...singlesAllOneGameScore, nextNewGame];
     setSinglesAllOneGameScore(newSinglesAllOneGameScore);
     setOrderBall(defaultOrderBallState);
+    setGameNo((gameNo) => gameNo + 1);
   };
 
   const judgeFinalGameCount = (winTeam: TeamWinOrLose, looseTeam: TeamWinOrLose) => {

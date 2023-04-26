@@ -95,7 +95,7 @@ export const courseState = atom<Course | null>({
   key: 'courseState',
   default: null,
 });
-export const poachVolleyCourseStaet = atom<PoachVolleyCourse | null>({
+export const poachVolleyCourseState = atom<PoachVolleyCourse | null>({
   key: 'poachVolleyCourseStaet',
   default: null,
 });
@@ -166,4 +166,9 @@ export const serveListSelector = selectorFamily<number, PlayerNo | null>({
       const isFirstServeCount = serveList.filter((isFirstServe) => isFirstServe === true).length;
       return serveListLength < 1 ? 0 : Math.round((isFirstServeCount / serveListLength) * 100);
     },
+});
+
+export const gameNoState = atom<number>({
+  key: 'gameNoState',
+  default: 1,
 });

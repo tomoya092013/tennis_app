@@ -35,14 +35,15 @@ export type ServeData = {
 };
 
 export type PointOrMissDetail = {
+  gameNo: number;
   order: number;
   serve: Serve | null;
   shotType: ShotType;
-  foreOrBack?: ForeOrBack | null;
-  course?: Course | null;
-  poachVolleyCourse?: PoachVolleyCourse | null;
-  missResult?: MissResult | null;
-  rallyCount?: RallyCount;
+  foreOrBack: ForeOrBack | null;
+  course: Course | null;
+  poachVolleyCourse: PoachVolleyCourse | null;
+  missResult: MissResult | null;
+  rallyCount: RallyCount | null;
 };
 
 export type SinglesDetailData = {
