@@ -48,12 +48,10 @@ export type PointOrMissDetail = {
 
 export type SinglesDetailData = {
   player1: {
-    player: GamePlayer | null;
     point: PointOrMissDetail[];
     miss: PointOrMissDetail[];
   };
   player2: {
-    player: GamePlayer | null;
     point: PointOrMissDetail[];
     miss: PointOrMissDetail[];
   };

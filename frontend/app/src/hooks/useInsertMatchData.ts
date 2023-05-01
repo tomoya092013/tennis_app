@@ -1,5 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { gamePlayerListState, serveListState, singlesDetailDataState } from '../store';
+import { useModalPointDetail } from './useModalPointDetail';
 
 export const useInsertMatchData = () => {
   const gamePlayer = useRecoilValue(gamePlayerListState);
@@ -7,10 +8,15 @@ export const useInsertMatchData = () => {
   const player2ServeData = useRecoilValue(serveListState('player2'));
   const singlesDetailData = useRecoilValue(singlesDetailDataState);
 
+  //確認用
+  const { singlesAllOneGameScore } = useModalPointDetail();
+
   const insertMatchData = () => {
-    const gamePlayer1 = gamePlayer[0].name;
-    const gamePlayer2 = gamePlayer[1].name;
-    const matchTitle = `${gamePlayer1} vs ${gamePlayer2}`;
+    console.log(singlesAllOneGameScore);
+
+    const gamePlayer1Name = gamePlayer[0].name;
+    const gamePlayer2Name = gamePlayer[1].name;
+    const matchTitle = `${gamePlayer1Name} vs ${gamePlayer2Name}`;
 
     const serveData1 = player1ServeData.map((serveData) => ({ playerId: gamePlayer[0].id, isFirst: serveData }));
     const serveData2 = player2ServeData.map((serveData) => ({ playerId: gamePlayer[1].id, isFirst: serveData }));
@@ -55,12 +61,25 @@ export const useInsertMatchData = () => {
       player_id: gamePlayer[1].id,
       isPoint: false,
     }));
-
     pointOrMissData.push(...payer1PointData, ...player1MissData, ...player2PointData, ...player2MissData);
 
-    const body = [{ matchTitle }, { serveData }, { gameNumber }, { pointOrMissData }];
+    const gamePlayerList = [];
+    const gamePlayer1 = [
+      {
+        player_id: gamePlayer[0].id,
+        playerNo: gamePlayer[0].playerNo,
+      },
+    ];
+    const gamePlayer2 = [
+      {
+        player_id: gamePlayer[1].id,
+        playerNo: gamePlayer[1].playerNo,
+      },
+    ];
+    gamePlayerList.push(...gamePlayer1, ...gamePlayer2);
 
-    // console.log(JSON.stringify(allServeDataList));
+    const body = [{ matchTitle }, { serveData }, { gameNumber }, { pointOrMissData }, { gamePlayerList }];
+
     fetch('http://localhost:5001/match/register', { method: 'POST', body: JSON.stringify(body) });
   };
 

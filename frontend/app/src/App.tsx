@@ -13,11 +13,15 @@ import ShotType from './components/Modal/ShotType/ShotType';
 import SettingNewgame from './components/SettingNewGame/SettingNewgame';
 import CreatePlayer from './components/CreatePlayer/CreatePlayer';
 import SelectGamePlayers from './components/SelectGamePlayers/SelectGamePlayers';
+import MatchList from './components/MatchData/MatchList';
+import MatchDetail from './components/MatchData/MatchDetail/MatchDetail';
 
 const App = () => {
   return (
     <div className="app">
       <Routes>
+        <Route path="/match" element={<MatchList />} />
+        <Route path="/match/:id" element={<MatchDetail />} />
         <Route path="/" element={<CreatePlayer />} />
         <Route path="/settingNewGame" element={<SettingNewgame />} />
         <Route path="/selectGamePlayers" element={<SelectGamePlayers />} />
