@@ -20,12 +20,10 @@ import {
 
 export const defaultSinglesDetailDataState: SinglesDetailData = {
   player1: {
-    player: null,
     point: [],
     miss: [],
   },
   player2: {
-    player: null,
     point: [],
     miss: [],
   },

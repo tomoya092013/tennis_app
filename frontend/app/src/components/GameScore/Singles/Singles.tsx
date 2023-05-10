@@ -8,17 +8,12 @@ import PlayerState from '../PlayerState/PlayerState';
 import OneGameScoreDisplayOfSingles from './OneGameScoreDisplayOfSingles/OneGameScoreDisplayOfSingles';
 import ServeData from '../ServeData/ServeDAta';
 import { useInsertMatchData } from '../../../hooks/useInsertMatchData';
-import { useRecoilValue } from 'recoil';
-import { gameNoState } from '../../../store';
 
 const Singles = () => {
   const { singlesAllOneGameScore, backToServeResult } = useModalPointDetail();
   const { serve } = useModalPointDetail();
   const { gamePlayerList } = useSelectGamePlayer();
   const { insertMatchData } = useInsertMatchData();
-
-  const gameNo = useRecoilValue(gameNoState);
-  console.log(gameNo);
 
   if (gamePlayerList.length < 2) return null;
   const gamePlayer1: GamePlayer = gamePlayerList[0];
