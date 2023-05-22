@@ -13,6 +13,7 @@ type Props = {
 const PointOrMissArea = ({ playerNo, pointOrMiss, gameOrder }: Props) => {
   const { singlesAllOneGameScore } = useModalPointDetail();
   const { pointOrMissStringBuilder } = usePointOrMissStringBuilder();
+
   return (
     <div className="detailPointorMiss">
       {singlesAllOneGameScore[gameOrder][playerNo][pointOrMiss].length > 0 &&

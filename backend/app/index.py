@@ -38,7 +38,6 @@ def create_player():
             cursor.execute(sql_player_register, [name])
             connection.commit()
             result_json = json.dumps({"result": "ok"})
-            print(result_json)
     return result_json
 
 
@@ -52,7 +51,7 @@ def match():
 
 
 def get_match_detail(match_ID, gameNo, isPoint, player):
-    query = f"SELECT (game_number,pointmiss_order,serve,shot_type,fore_back,course,poach_volley_course,miss_result,rally_count) FROM public.points_misses WHERE public.points_misses.match_id = {match_ID} AND public.points_misses.game_number = {gameNo} AND public.points_misses.ispoint = {isPoint} AND public.points_misses.player_id = (SELECT player_id FROM public.game_players WHERE match_id = {match_ID} AND player_number = '{player}') ORDER BY public.points_misses.pointmiss_order ASC "
+    query = f"SELECT pointmiss_order,serve,shot_type,fore_back,course,poach_volley_course,miss_result,rally_count FROM public.points_misses WHERE public.points_misses.match_id = {match_ID} AND public.points_misses.game_number = {gameNo} AND public.points_misses.ispoint = {isPoint} AND public.points_misses.player_id = (SELECT player_id FROM public.game_players WHERE match_id = {match_ID} AND player_number = '{player}') ORDER BY public.points_misses.pointmiss_order ASC "
     return query
 
 
