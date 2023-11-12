@@ -4,8 +4,10 @@ import json
 import pandas as pd
 from psycopg2.extras import execute_values
 from datetime import date
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app) 
 app.config["JSON_AS_ASCII"] = False
 
 connection = psycopg2.connect(
@@ -15,6 +17,85 @@ connection = psycopg2.connect(
     password="password",
     database="sample",
 )
+
+with connection.cursor() as cursor:
+    # テーブル作成のSQLクエリ
+    create_players_table_query = """
+        CREATE TABLE IF NOT EXISTS public.players (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL
+        )
+    """
+
+    create_matches_table_query = """
+        CREATE TABLE IF NOT EXISTS public.matches (
+            id SERIAL PRIMARY KEY,
+            date DATE NOT NULL,
+            title VARCHAR(255)
+        )
+    """
+
+    create_serves_table_query = """
+        CREATE TABLE IF NOT EXISTS public.serves (
+            id SERIAL PRIMARY KEY,
+            match_id INTEGER REFERENCES public.matches(id),
+            player_id INTEGER REFERENCES public.players(id),
+            isfirst BOOLEAN
+        )
+    """
+
+    create_games_table_query = """
+        CREATE TABLE IF NOT EXISTS public.games (
+            id SERIAL PRIMARY KEY,
+            game_number INTEGER,
+            match_id INTEGER REFERENCES public.matches(id)
+        )
+    """
+
+    create_points_misses_table_query = """
+        CREATE TABLE IF NOT EXISTS public.points_misses (
+            id SERIAL PRIMARY KEY,
+            match_id INTEGER REFERENCES public.matches(id),
+            game_number INTEGER,
+            player_id INTEGER REFERENCES public.players(id),
+            ispoint BOOLEAN,
+            pointmiss_order INTEGER,
+            serve VARCHAR(255),
+            shot_type VARCHAR(255),
+            fore_back VARCHAR(255),
+            course VARCHAR(255),
+            poach_volley_course VARCHAR(255),
+            miss_result VARCHAR(255),
+            rally_count INTEGER
+        )
+    """
+
+    create_game_players_table_query = """
+        CREATE TABLE IF NOT EXISTS public.game_players (
+            id SERIAL PRIMARY KEY,
+            match_id INTEGER REFERENCES public.matches(id),
+            player_id INTEGER REFERENCES public.players(id),
+            player_number VARCHAR(255)
+        )
+    """
+
+    # クエリを実行
+    cursor.execute(create_players_table_query)
+    cursor.execute(create_matches_table_query)
+    cursor.execute(create_serves_table_query)
+    cursor.execute(create_games_table_query)
+    cursor.execute(create_points_misses_table_query)
+    cursor.execute(create_game_players_table_query)
+
+# 変更をコミット
+connection.commit()
+
+
+
+
+
+
+
 
 
 @app.route("/player")
